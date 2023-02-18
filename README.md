@@ -4,6 +4,6 @@
 
 ## Contacto
 
-Este proyecto es creado y mantenido por [Sergio Julian Zona Moreno](https://github.com/SergioZona) (sj.zona@uniandes.edu.co)
+Este proyecto es desarrollado y mantenido por [Sergio Julian Zona Moreno](https://github.com/SergioZona) (sj.zona@uniandes.edu.co)
 
-Profesor encargado [aquí](https://economia.uniandes.edu.co/alvarez) 👈
+Profesor líder del proyecto: [Andrés Álvarez](https://economia.uniandes.edu.co/alvarez) 👈
