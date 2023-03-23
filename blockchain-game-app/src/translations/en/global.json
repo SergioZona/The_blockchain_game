@@ -1,0 +1,8 @@
+{
+    "StartGuest":{
+        "info":"Enter to a current game"
+    },
+    "StartHost":{
+        "info":"Host a new game"
+    }
+}
