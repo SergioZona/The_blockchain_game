@@ -1,0 +1,8 @@
+{
+    "StartGuest":{
+        "info":"Entrar a un juego actual"
+    },
+    "StartHost":{
+        "info":"Crear un juego"
+    }
+}
