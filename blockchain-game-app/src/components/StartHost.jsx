@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-function Start() {
+function StartHost({ socket }) {
   const [count, setCount] = useState(0);
   const [t, i18n] = useTranslation("global");
 
@@ -18,4 +18,4 @@ function Start() {
   );
 }
 
-export default Start;
+export default StartHost;
