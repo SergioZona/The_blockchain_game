@@ -14,6 +14,12 @@
     "GuestWelcome":{
         "title":"You are almost there!",
         "info":"Please enter the pin code that your teacher/instructor has given you. Choose a fancy name."
+    },
+    "UsernameTextField":{
+        "label":"Enter a username"
+    },
+    "PinTextField":{
+        "label":"Enter the pin code"
     }
     
 }

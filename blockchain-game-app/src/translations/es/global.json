@@ -14,6 +14,12 @@
     "GuestWelcome":{
         "title":"¡Ya casi has llegado!",
         "info":"Ingrese el código pin que su maestro/instructor le ha dado. Elige un nombre elegante."
+    },
+    "UsernameTextField":{
+        "label":"Ingrese un nombre de usuario"
+    },
+    "PinTextField":{
+        "label":"Ingrese el código pin"
     }
     
 }

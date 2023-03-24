@@ -24,9 +24,6 @@ const NavBar = () => {
     
   };
 
-  const changeLang = (lang) =>{
-    i18n.changeLanguage(language)
-  }
 
   return (
     <AppBar position="fixed" sx={{ bgcolor: "#1e1e1e" }}>
