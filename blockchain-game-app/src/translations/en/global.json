@@ -4,5 +4,10 @@
     },
     "StartHost":{
         "info":"Host a new game"
+    },
+    "StartDescription":{
+        "title":"Welcome to The blockchain game!",
+        "info":"Based on the game designed by J Scott Christianson. In this digital implementation, you will learn the basics of Blockchain in a fun and interactive way.",
+        "quote":"“The blockchain is the financial challenge of our time. It is going to change the way that our financial world operates” - Blythe Masters"
     }
 }

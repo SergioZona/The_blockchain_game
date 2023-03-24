@@ -5,6 +5,7 @@ import { Box, Container } from "@mui/material";
 import StartHost from "./components/StartHost";
 import StartGuest from "./components/StartGuest";
 import NavBar from "./components/NavBar";
+import Description from "./components/Description";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -14,18 +15,20 @@ function App() {
       <Container maxWidth="xl" disableGutters>
         <NavBar />
       </Container>
+      <Description />
+      
       <Box
         className="start-game"
         sx={{
-          marginTop: "20em",
+          marginTop: "-3rem",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           gap: "2rem",
         }}
       >
-        <StartHost></StartHost>
-        <StartGuest></StartGuest>
+        <StartHost />
+        <StartGuest />
       </Box>
     </>
   );
