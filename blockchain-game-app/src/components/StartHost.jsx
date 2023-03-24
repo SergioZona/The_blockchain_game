@@ -2,7 +2,7 @@ import { useState } from "react";
 //import { Button, Container } from "react-bootstrap";
 import { Button } from "@mui/material";
 
-function Start() {
+function StartHost({ socket }) {
   const [count, setCount] = useState(0);
 
   return (
@@ -16,4 +16,4 @@ function Start() {
   );
 }
 
-export default Start;
+export default StartHost;
