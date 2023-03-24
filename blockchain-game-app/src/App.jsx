@@ -15,6 +15,7 @@ import NavBar from "./components/NavBar";
 import Description from "./components/Description";
 import Root from "./components/Root";
 import Test from "./components/Test";
+import GuestLogin from "./components/GuestLogin";
 
 function App() {
   const socket = io.connect(SERVER_URL);
@@ -24,6 +25,7 @@ function App() {
     createRoutesFromElements(
       <Route>
         <Route path="/" element={<Root socket={socket} />} />
+        <Route path="/guestLogin" element={<GuestLogin socket={socket} />} />
         <Route path="/test" element={<Test socket={socket} />} />
         {/* <Route path="*" element={return (<div>Esta ruta no existe<div/>)} /> */}
       </Route>

@@ -4,14 +4,17 @@ import {
   Link,
 } from "react-router-dom";
 import StartHost from "./StartHost";
+import Description from "./Description";
+import StartGuest from "./StartGuest";
 
 const Root = ({ socket }) => {
   return (
     <>
+      <Description />
       <Box
         className="start-game"
         sx={{
-          marginTop: "20em",
+          marginTop: "-4em",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -20,6 +23,9 @@ const Root = ({ socket }) => {
       >
         <Link to="/">
           <StartHost socket={socket}></StartHost>
+        </Link>
+        <Link to="/guestLogin">
+          <StartGuest socket={socket}></StartGuest>
         </Link>
 
         <Link to="/test">test</Link>

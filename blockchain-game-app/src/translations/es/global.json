@@ -6,8 +6,14 @@
         "info":"Crear un juego"
     },
     "StartDescription":{
-        "title":"Bienvenido a The Blockchain game!",
+        "title":"¡Bienvenido a The Blockchain game!",
         "info":"Basado en el juego diseñado por J Scott Christianson. En esta aplicación digital, aprenderás los fundamentos de Blockchain de una forma divertida e interactiva",
         "quote":"“La cadena de bloques es el reto financiero de nuestro tiempo. Va a cambiar el funcionamiento de nuestro mundo financiero” - Blythe Masters."
+    },
+    
+    "GuestWelcome":{
+        "title":"¡Ya casi has llegado!",
+        "info":"Ingrese el código pin que su maestro/instructor le ha dado. Elige un nombre elegante."
     }
+    
 }
