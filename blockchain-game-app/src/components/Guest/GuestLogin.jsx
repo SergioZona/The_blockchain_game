@@ -1,14 +1,14 @@
 import { useTranslation } from "react-i18next";
 import { Grid , Toolbar, Box, Container, Typography } from "@mui/material";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import GuestWelcome from "../GuestWelcome";
+import GuestWelcome from "./Login/GuestWelcome";
 import {
     Outlet, // Default route in case it doesn't match.
     Link,
 } from "react-router-dom"
-import UsernameTextField from "../UsernameTextField";
-import PinTextField from "../PinTextField";
-import ButtonGuest from "../ButtonGuest";
+import UsernameTextField from "./Login/UsernameTextField";
+import PinTextField from "./Login/PinTextField";
+import ButtonGuest from "./Login/ButtonGuest";
 
 
 const GuestLogin = ({ socket }) => {
