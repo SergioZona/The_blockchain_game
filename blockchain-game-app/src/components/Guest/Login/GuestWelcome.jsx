@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next";
 import { Box, Container, Typography } from "@mui/material";
 
 function GuestWelcome() {
-
     const [t, i18n] = useTranslation("global");
+    
   return (
     <Container maxWidth="md" sx={{ textAlign: "center", py: 10 }}>
     <Typography variant="h6" sx={{ color: "#000000", mb: 4 }}>

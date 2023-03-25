@@ -20,6 +20,23 @@
     },
     "PinTextField":{
         "label":"Ingrese el código pin"
+    },
+    "ButtonGuest":{
+        "label":"Unirse"
+    },
+    "Information":{
+        "label": "¡Nadie más que tú puede saberlo!",
+        "wait": "Espere hasta el siguiente paso..."
+    },
+    "TextFieldID":{
+        "label":"ID Privado"
+    },
+    "UserNameID":{
+        "label":"Este es tu identificador privado"
+    },
+    "Step_1":{
+        "step":"Paso 1",
+        "label": "Conoce tu identificador privado"
     }
     
 }

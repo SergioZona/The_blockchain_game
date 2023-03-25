@@ -20,6 +20,23 @@
     },
     "PinTextField":{
         "label":"Enter the pin code"
+    },
+    "ButtonGuest":{
+        "label":"Le's do it!"
+    },
+    "Information":{
+        "label": "No one besides you can know it!",
+        "wait": "Please wait until the next step..."
+    },
+    "TextFieldID":{
+        "label":"Private ID"
+    },
+    "UserNameID":{
+        "label":"This is your private ID"
+    },
+    "Step_1":{
+        "step":"Step 1",
+        "label": "Know your private ID"
     }
     
 }

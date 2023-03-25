@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { ReactComponent as Logo } from '../../../assets/Hacker.svg'
-import { Grid, Box, Container, Typography, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, Input, FormHelperText } from "@mui/material";
+import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from "@mui/material";
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { useTranslation } from "react-i18next";
 import Visibility from '@mui/icons-material/Visibility';
 
 const TextFieldId = ({ socket }) => {
     const [showPassword, setShowPassword] = React.useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-    
+    const [t, i18n] = useTranslation("global");
+
     return (
         <FormControl sx={{ m: 0, ml: 0, width: '25ch', textAlign: "center" }} disabled variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-password">Private ID</InputLabel>
+        <InputLabel htmlFor="outlined-adornment-password">{t("TextFieldID.label")}</InputLabel>
             <OutlinedInput
                 id="outlined-adornment-password"
                 type={showPassword ? 'text' : 'password'}

@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
+
 function ButtonGuest({ socket }) {
   const [t, i18n] = useTranslation("global");
 
@@ -22,7 +23,7 @@ function ButtonGuest({ socket }) {
             },
       }}
     >
-     Let's do it
+     {t("ButtonGuest.label")}
     </Button>
   );
 }
