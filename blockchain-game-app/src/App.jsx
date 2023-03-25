@@ -15,7 +15,7 @@ import NavBar from "./components/NavBar";
 import Description from "./components/Description";
 import Root from "./components/Root";
 import Test from "./components/Test";
-import GuestLogin from "./components/GuestLogin";
+import GuestLogin from "./components/Guest/GuestLogin";
 
 function App() {
   const socket = io.connect(SERVER_URL);
