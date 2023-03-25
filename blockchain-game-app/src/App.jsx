@@ -11,8 +11,8 @@ import {
 import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 
-import NavBar from "./components/NavBar";
-import Description from "./components/Description";
+import NavBar from "./components/root/NavBar";
+import Description from "./components/root/Description";
 import Root from "./components/Root";
 import Test from "./components/Test";
 import GuestLogin from "./components/Guest/GuestLogin";

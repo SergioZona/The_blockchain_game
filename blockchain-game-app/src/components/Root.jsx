@@ -3,9 +3,9 @@ import {
   Outlet, // Default route in case it doesn't match.
   Link,
 } from "react-router-dom";
-import StartHost from "./StartHost";
-import Description from "./Description";
-import StartGuest from "./StartGuest";
+import StartHost from "./root/StartHost";
+import Description from "./root/Description";
+import StartGuest from "./root/StartGuest";
 
 const Root = ({ socket }) => {
   return (

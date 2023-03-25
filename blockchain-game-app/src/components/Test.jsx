@@ -3,8 +3,8 @@ import {
   Outlet, // Default route in case it doesn't match.
   Link,
 } from "react-router-dom";
-import StartGuest from "./StartGuest";
-import StartHost from "./StartHost";
+import StartGuest from "./root/StartGuest";
+import StartHost from "./root/StartHost";
 
 const Test = ({ socket }) => {
   return (

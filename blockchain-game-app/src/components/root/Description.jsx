@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Box, Container, Typography } from "@mui/material";
-import { ReactComponent as ReactLogo1 } from '../assets/Description_1.svg'
-import { ReactComponent as ReactLogo2 } from '../assets/Description_2.svg'
+import { ReactComponent as ReactLogo1 } from '../../assets/Description_1.svg'
+import { ReactComponent as ReactLogo2 } from '../../assets/Description_2.svg'
 
 function Description() {
 
