@@ -21,14 +21,12 @@ const Root = ({ socket }) => {
           gap: "2rem",
         }}
       >
-        <Link to="/">
+        <Link to="/" style={{ textDecoration: 'none' }} >
           <StartHost socket={socket}></StartHost>
         </Link>
-        <Link to="/guestLogin">
+        <Link to="/guestLogin" style={{ textDecoration: 'none' }}>
           <StartGuest socket={socket}></StartGuest>
         </Link>
-
-        <Link to="/test">test</Link>
       </Box>
       <Outlet />
     </>

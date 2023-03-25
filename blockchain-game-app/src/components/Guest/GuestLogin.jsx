@@ -1,14 +1,13 @@
 import { Grid , Box, Container } from "@mui/material";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import GuestWelcome from "./Login/GuestWelcome";
-import {
-    Outlet, // Default route in case it doesn't match.
-    Link,
-} from "react-router-dom"
 import UsernameTextField from "./Login/UsernameTextField";
 import PinTextField from "./Login/PinTextField";
 import ButtonGuest from "./Login/ButtonGuest";
-
+import {
+    Outlet, // Default route in case it doesn't match.
+    Link,
+  } from "react-router-dom";
 
 const GuestLogin = ({ socket }) => {
     return (
@@ -30,12 +29,14 @@ const GuestLogin = ({ socket }) => {
                         <PinTextField socket={socket}></PinTextField>
                     </Container>
                     <Container sx={{ marginLeft:"0em",  marginTop: "-2em", textAlign: "center"}}>
+                    <Link to="/Step_1" style={{ textDecoration: 'none' }}>
                     <ButtonGuest></ButtonGuest>
+                    </Link>
                     </Container>
                    
                 </Grid>
             </Grid>
-           
+            <Outlet />
         </Box>
     );
 };

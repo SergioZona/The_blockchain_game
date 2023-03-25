@@ -16,6 +16,7 @@ import Description from "./components/root/Description";
 import Root from "./components/Root";
 import Test from "./components/Test";
 import GuestLogin from "./components/Guest/GuestLogin";
+import Step_1 from "./components/Guest/Step_1";
 
 function App() {
   const socket = io.connect(SERVER_URL);
@@ -27,6 +28,7 @@ function App() {
         <Route path="/" element={<Root socket={socket} />} />
         <Route path="/guestLogin" element={<GuestLogin socket={socket} />} />
         <Route path="/test" element={<Test socket={socket} />} />
+        <Route path="/Step_1" element={<Step_1 socket={socket} />} />
         {/* <Route path="*" element={return (<div>Esta ruta no existe<div/>)} /> */}
       </Route>
     )
