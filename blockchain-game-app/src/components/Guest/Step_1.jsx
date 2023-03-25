@@ -1,28 +1,26 @@
 import PersonIcon from '@mui/icons-material/Person';
 import { Typography, Container } from "@mui/material";
+import Username from './Step_1/Username';
+import { ReactComponent as Logo } from '../../assets/Status_1.svg'
+import UsernameId from './Step_1/UsernameId';
+import Information from './Step_1/Information';
 
 const Step_1 = ({ socket }) => {
   return (
-    <Container >
-      <Container sx={{ position: "absolute", left: 7, top: 10, py: 8 }}>
-        <PersonIcon
-          sx={{
-            textAlign: "left",
-            color: "#000000",
-            fontSize: '6vw',
-            maxWidth: '60px',
-            '@media (max-width:600px)': {
-              fontSize: '10vw',
-              maxWidth: '80px',
-            },
-          }}
-        />
-      </Container>
-      <Container sx={{ textAlign: "center", marginTop: "-3rem", py: 25 }}>
+    <Container sx={{ maxWidth: "800px", lexDirection: 'column', alignItems: 'center' }}>
+      <Username />
+      <Container sx={{ textAlign: "center", mt: "2rem", pb: "4rem", py: 20, marginLeft: "0rem"}}>
         <Typography variant="h6" sx={{ color: "#000000", mb: 4 }}>
           <strong>Step 1:</strong> Know your private ID
         </Typography>
       </Container>
+      <Container sx={{ textAlign: "center",  marginTop: "-14rem" }}>
+        <Logo  
+          viewBox="0 -14 700 180"
+        />
+      </Container>
+      <UsernameId></UsernameId>
+    <Information></Information>
     </Container>
   );
 };
