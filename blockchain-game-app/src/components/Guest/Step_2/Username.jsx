@@ -1,9 +1,11 @@
 import PersonIcon from '@mui/icons-material/Person';
 import { Typography, Container, TextField } from "@mui/material";
+import TextFieldId from '../Step_1/TextFieldId';
 
 const Username = ({ socket }) => {
     return (
-        <Container sx={{ position: "absolute", left: 7, top: 10, py: 8, display: "flex", alignItems: "center" }}>
+        <Container>
+             <Container sx={{ position: "absolute", left: 7, top: 10, py: 8, display: "flex", alignItems: "center" }}>
             <PersonIcon
                 sx={{
                     textAlign: "left",
@@ -20,6 +22,18 @@ const Username = ({ socket }) => {
             <Typography variant="h5" component="div" sx={{ color: "#000000", flex: "1 1 auto", ml: 1 }}>
                 User007
             </Typography>
+            </Container>
+                <Container
+                    sx={{
+                    position: "absolute",
+                    left: 7,
+                    py: 20,
+                    display: "flex",
+                    alignItems: "center",
+                    }}
+                >
+                <TextFieldId />
+            </Container>
         </Container>
     );
 };

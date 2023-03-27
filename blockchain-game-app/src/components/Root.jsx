@@ -12,21 +12,21 @@ const Root = ({ socket }) => {
     <>
       <Description />
       <Box
-        className="start-game"
-        sx={{
-          marginTop: "-4em",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "2rem",
-        }}
+          className="start-game"
+          sx={{
+            marginTop: "-4em",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "2rem",
+          }}
       >
-        <Link to="/" style={{ textDecoration: 'none' }} >
-          <StartHost socket={socket}></StartHost>
-        </Link>
-        <Link to="/guestLogin" style={{ textDecoration: 'none' }}>
-          <StartGuest socket={socket}></StartGuest>
-        </Link>
+          <Link to="/" style={{ textDecoration: 'none' }} >
+            <StartHost socket={socket}></StartHost>
+          </Link>
+          <Link to="/guestLogin" style={{ textDecoration: 'none' }}>
+            <StartGuest socket={socket}></StartGuest>
+          </Link>
       </Box>
       <Outlet />
     </>

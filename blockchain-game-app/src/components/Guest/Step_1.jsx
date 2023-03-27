@@ -1,4 +1,3 @@
-import PersonIcon from '@mui/icons-material/Person';
 import { Typography, Container } from "@mui/material";
 import Username from './Step_1/Username';
 import { ReactComponent as Logo } from '../../assets/Status_1.svg'
@@ -17,13 +16,12 @@ const Step_1 = ({ socket }) => {
             </Typography>
         </Container>
         <Container sx={{ textAlign: "center",  marginTop: "-14rem" }}>
-            <Logo  
-            viewBox="0 -14 700 180"
-            />
+            <Logo  viewBox="0 -14 700 180"/>
         </Container>
         <UsernameId></UsernameId>
         <Information></Information>
         </Container>
+        
     );
 };
 

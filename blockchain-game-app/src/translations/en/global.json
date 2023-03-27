@@ -37,6 +37,16 @@
     "Step_1":{
         "step":"Step 1",
         "label": "Know your private ID"
+    },
+    "Step_2":{
+        "step":"Step 2",
+        "label": "Hashing?",
+        "info_1": "It is just applying a formula.",
+        "info_2":"What formula? Whatever the blockchain wants!",
+        "title":"For example:",
+        "example":"Grade 1 + Grade 2 + Grade 3 = Total",
+        "numeric":"80+65+70=215"
+
     }
     
 }

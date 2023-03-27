@@ -13,14 +13,14 @@ const GuestLogin = ({ socket }) => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
-                <Grid item xs={1} sm={0}>
+                <Grid item xs={2} sm={3}>
                     <Container sx={{ textAlign: "left", py: 8 }} >
                         <Link to="/">
                             <KeyboardBackspaceIcon sx={{ color: "#000000" , fontSize: '5vw', maxWidth: '50px' }}  />
                         </Link>
                     </Container>
                 </Grid>
-                <Grid item xs={11} sm={10}>
+                <Grid item xs={10} sm={6}>
                     <Container sx={{ marginLeft:"0em", textAlign: "center", py: 1}}>
                         <GuestWelcome sx={{ py: 2}}/>
                         <UsernameTextField socket={socket} ></UsernameTextField>

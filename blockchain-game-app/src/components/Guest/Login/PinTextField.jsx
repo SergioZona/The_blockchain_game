@@ -21,7 +21,7 @@ function PinTextField({ socket }) {
         }}
         >
           <InputLabel sx={{ color: 'black', '&.Mui-focused': { color: 'black' }, fontWeight: 'bold'}}>{t("PinTextField.label")}</InputLabel>
-          <OutlinedInput />          
+          <OutlinedInput inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}/>           
         </FormControl>
     );
 }
