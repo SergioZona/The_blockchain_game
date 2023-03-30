@@ -21,7 +21,7 @@ const Root = ({ socket }) => {
             gap: "2rem",
           }}
       >
-          <Link to="/" style={{ textDecoration: 'none' }} >
+          <Link to="/WaitingRoom" style={{ textDecoration: 'none' }} >
             <StartHost socket={socket}></StartHost>
           </Link>
           <Link to="/guestLogin" style={{ textDecoration: 'none' }}>
