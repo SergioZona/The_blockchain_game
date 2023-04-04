@@ -1,68 +1,74 @@
 {
-    "StartGuest":{
-        "info":"Enter to a current game"
-    },
-    "StartHost":{
-        "info":"Host a new game"
-    },
-    "StartDescription":{
-        "title":"Welcome to The blockchain game!",
-        "info":"Based on the game designed by J Scott Christianson. In this digital implementation, you will learn the basics of Blockchain in a fun and interactive way.",
-        "quote":"“The blockchain is the financial challenge of our time. It is going to change the way that our financial world operates” - Blythe Masters"
-    },
-    
-    "GuestWelcome":{
-        "title":"You are almost there!",
-        "info":"Please enter the pin code that your teacher/instructor has given you. Choose a fancy name."
-    },
-    "UsernameTextField":{
-        "label":"Enter a username"
-    },
-    "PinTextField":{
-        "label":"Enter the pin code"
-    },
-    "ButtonGuest":{
-        "label":"Le's do it!"
-    },
-    "Information":{
-        "label": "No one besides you can know it!",
-        "wait": "Please wait until the next step..."
-    },
-    "TextFieldID":{
-        "label":"Private ID"
-    },
-    "UserNameID":{
-        "label":"This is your private ID"
-    },
-    "Step_1":{
-        "step":"Step 1",
-        "label": "Know your private ID"
-    },
-    "Step_2":{
-        "step":"Step 2",
-        "label": "Hashing?",
-        "info_1": "It is just applying a formula.",
-        "info_2":"What formula? Whatever the blockchain wants!",
-        "title":"For example:",
-        "example":"a + b + c = Total",
-        "numeric":"80+65+70=215"
+  "StartGuest": {
+    "info": "Enter to a current game"
+  },
+  "StartHost": {
+    "info": "Host a new game",
+    "confirmation": "Confirmation",
+    "question": "Are you sure you want to continue?",
+    "cancel": "Cancel",
+    "continue": "Continue"
+  },
+  "StartDescription": {
+    "title": "Welcome to The blockchain game!",
+    "info": "Based on the game designed by J Scott Christianson. In this digital implementation, you will learn the basics of Blockchain in a fun and interactive way.",
+    "quote": "“The blockchain is the financial challenge of our time. It is going to change the way that our financial world operates” - Blythe Masters"
+  },
+  "GamePin": { "label": "PIN:" },
 
-    },
-    "Block_1":{
-        "title": "Block 1",
-        "item_1": "Course:",
-        "value_1": "Parks 320",
-        "item_2": "Student Public Key:",
-        "value_2": "ad59da",
-        "item_3": "Grade:",
-        "value_3": "F",
-        "item_4": "a = ",
-        "value_4": "Value of the first letter of the course. (P=80)",
-        "item_5": "b = ",
-        "value_5": "Value of the second letter of the course. (A=65)",
-        "item_6": "c = ",
-        "value_6": "Value of the grade. (P=70)",
-        "item_7": "look up the table for the values"
-    }
-    
+  "GuestWelcome": {
+    "title": "You are almost there!",
+    "info": "Please enter the pin code that your teacher/instructor has given you. Choose a fancy name."
+  },
+  "UsernameTextField": {
+    "label": "Enter a username"
+  },
+  "PinTextField": {
+    "label": "Enter the pin code"
+  },
+  "ButtonGuest": {
+    "label": "Let's do it!"
+  },
+  "Information": {
+    "label": "No one besides you can know it!",
+    "wait": "Please wait until the next step..."
+  },
+  "TextFieldID": {
+    "label": "Private ID"
+  },
+  "UserNameID": {
+    "label": "This is your private ID"
+  },
+  "Step_1": {
+    "step": "Step 1",
+    "label": "Know your private ID"
+  },
+  "Step_2":{
+    "step":"Step 2",
+    "label": "Hashing?",
+    "info_1": "It is just applying a formula.",
+    "info_2":"What formula? Whatever the blockchain wants!",
+    "title":"For example:",
+    "example":"a + b + c = Total",
+    "numeric":"80+65+70=215"
+},
+  "GuestLogin": {
+    "error": "Connection error, please verify the PIN and try again."
+  },
+"Block_1":{
+    "title": "Block 1",
+    "item_1": "Course:",
+    "value_1": "Parks 320",
+    "item_2": "Student Public Key:",
+    "value_2": "ad59da",
+    "item_3": "Grade:",
+    "value_3": "F",
+    "item_4": "a = ",
+    "value_4": "Value of the first letter of the course. (P=80)",
+    "item_5": "b = ",
+    "value_5": "Value of the second letter of the course. (A=65)",
+    "item_6": "c = ",
+    "value_6": "Value of the grade. (P=70)",
+    "item_7": "look up the table for the values"
+  }
 }

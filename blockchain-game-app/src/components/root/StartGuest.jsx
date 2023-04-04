@@ -8,8 +8,6 @@ function StartGuest({ socket }) {
   const [t, i18n] = useTranslation("global");
 
   const handleLanguageClick = () => {
-    socket.connect();
-
     // Listen to an event
     socket.on("joined", (data) => {
       console.log(data);

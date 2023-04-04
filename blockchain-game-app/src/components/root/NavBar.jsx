@@ -21,14 +21,23 @@ const NavBar = () => {
 
   const handleLanguageClose = () => {
     setAnchorEl(null);
-    
   };
-
 
   return (
     <AppBar position="fixed" sx={{ bgcolor: "#1e1e1e" }}>
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography variant="h4" sx={{ flexGrow: 1, textAlign: "center" }}>
+      <Toolbar
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <Typography
+          variant="h4"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexGrow: 1,
+            textAlign: "center",
+            paddingLeft: 7.5,
+          }}
+        >
           The blockchain game
         </Typography>
         <IconButton
@@ -44,7 +53,7 @@ const NavBar = () => {
         >
           <LanguageIcon />
         </IconButton>
-        <Typography variant="h6" sx={{marginLeft: '0.7rem'}}>
+        <Typography variant="h6" sx={{ marginLeft: "0.7rem" }}>
           {i18n.language.toString().toUpperCase()}
         </Typography>
         <Menu

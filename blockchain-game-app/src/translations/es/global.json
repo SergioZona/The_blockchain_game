@@ -1,68 +1,76 @@
 {
-    "StartGuest":{
-        "info":"Entrar a un juego actual"
-    },
-    "StartHost":{
-        "info":"Crear un juego"
-    },
-    "StartDescription":{
-        "title":"¡Bienvenido a The Blockchain game!",
-        "info":"Basado en el juego diseñado por J Scott Christianson. En esta aplicación digital, aprenderás los fundamentos de Blockchain de una forma divertida e interactiva",
-        "quote":"“La cadena de bloques es el reto financiero de nuestro tiempo. Va a cambiar el funcionamiento de nuestro mundo financiero” - Blythe Masters."
-    },
-    
-    "GuestWelcome":{
-        "title":"¡Ya casi has llegado!",
-        "info":"Ingrese el código pin que su maestro/instructor le ha dado. Elige un nombre elegante."
-    },
-    "UsernameTextField":{
-        "label":"Ingrese un nombre de usuario"
-    },
-    "PinTextField":{
-        "label":"Ingrese el código pin"
-    },
-    "ButtonGuest":{
-        "label":"Unirse"
-    },
-    "Information":{
-        "label": "¡Nadie más que tú puede saberlo!",
-        "wait": "Espere hasta el siguiente paso..."
-    },
-    "TextFieldID":{
-        "label":"ID Privado"
-    },
-    "UserNameID":{
-        "label":"Este es tu identificador privado"
-    },
-    "Step_1":{
-        "step":"Paso 1",
-        "label": "Conoce tu identificador privado"
-    },
-    "Step_2":{
-        "step":"Step 2",
-        "label": "Hashing?",
-        "info_1": "Es simplemente aplicar una fórmula..",
-        "info_2":"¿Qué fórmula? ¡Lo que quiera la cadena de bloques!",
-        "title":"Por ejemplo:",
-        "example":"a + b + c = Total",
-        "numeric":"80+65+70=215"
+  "StartGuest": {
+    "info": "Entrar a un juego actual"
+  },
+  "StartHost": {
+    "info": "Crear un juego",
+    "confirmation": "Confirmación",
+    "question": "Seguro que desea continuar?",
+    "cancel": "Cancelar",
+    "continue": "Continuar"
+  },
+  "StartDescription": {
+    "title": "¡Bienvenido a The Blockchain game!",
+    "info": "Basado en el juego diseñado por J Scott Christianson. En esta aplicación digital, aprenderás los fundamentos de Blockchain de una forma divertida e interactiva",
+    "quote": "“La cadena de bloques es el reto financiero de nuestro tiempo. Va a cambiar el funcionamiento de nuestro mundo financiero” - Blythe Masters."
+  },
+  "GamePin": { "label": "PIN:" },
 
-    },
-    "Block_1":{
-        "title": "Bloque 1",
-        "item_1": "Curso:",
-        "value_1": "Parks 320",
-        "item_2": "Llave pública del estudiante:",
-        "value_2": "ad59da",
-        "item_3": "Nota:",
-        "value_3": "F",
-        "item_4": "a = ",
-        "value_4": "Valor de la primera letra del curso. (P=80)",
-        "item_5": "b = ",
-        "value_5": "Valor de la segunda letra del curso. (A=65)",
-        "item_6": "c = ",
-        "value_6": "Valor de la nota. (P=70)",
-        "item_7": "Busca en la tabla los valores"
-    }
-    
+  "GuestWelcome": {
+    "title": "¡Ya casi lo logras!",
+    "info": "Ingrese el PIN que su maestro/instructor le ha dado. Elija un nombre de usuario."
+  },
+  "UsernameTextField": {
+    "label": "Ingrese un nombre de usuario"
+  },
+  "PinTextField": {
+    "label": "Ingrese el código pin"
+  },
+  "ButtonGuest": {
+    "label": "Unirse"
+  },
+  "Information": {
+    "label": "¡Nadie más que tú puede saberlo!",
+    "wait": "Espere hasta el siguiente paso..."
+  },
+  "TextFieldID": {
+    "label": "ID Privado"
+  },
+  "UserNameID": {
+    "label": "Este es tu identificador privado"
+  },
+  "Step_1": {
+    "step": "Paso 1",
+    "label": "Conoce tu identificador privado"
+  },
+  "Step_2":{
+    "step":"Step 2",
+    "label": "Hashing?",
+    "info_1": "Es simplemente aplicar una fórmula..",
+    "info_2":"¿Qué fórmula? ¡Lo que quiera la cadena de bloques!",
+    "title":"Por ejemplo:",
+    "example":"a + b + c = Total",
+    "numeric":"80+65+70=215"
+
+},
+  "GuestLogin": {
+    "error": "Error de conexión, por favor verifique el PIN e intente nuevamente."
+  },
+  "Block_1":{
+      "title": "Bloque 1",
+      "item_1": "Curso:",
+      "value_1": "Parks 320",
+      "item_2": "Llave pública del estudiante:",
+      "value_2": "ad59da",
+      "item_3": "Nota:",
+      "value_3": "F",
+      "item_4": "a = ",
+      "value_4": "Valor de la primera letra del curso. (P=80)",
+      "item_5": "b = ",
+      "value_5": "Valor de la segunda letra del curso. (A=65)",
+      "item_6": "c = ",
+      "value_6": "Valor de la nota. (P=70)",
+      "item_7": "Busca en la tabla los valores"
+  }
 }
+
