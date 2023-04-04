@@ -1,52 +1,58 @@
 {
-    "StartGuest":{
-        "info":"Entrar a un juego actual"
-    },
-    "StartHost":{
-        "info":"Crear un juego"
-    },
-    "StartDescription":{
-        "title":"¡Bienvenido a The Blockchain game!",
-        "info":"Basado en el juego diseñado por J Scott Christianson. En esta aplicación digital, aprenderás los fundamentos de Blockchain de una forma divertida e interactiva",
-        "quote":"“La cadena de bloques es el reto financiero de nuestro tiempo. Va a cambiar el funcionamiento de nuestro mundo financiero” - Blythe Masters."
-    },
-    
-    "GuestWelcome":{
-        "title":"¡Ya casi has llegado!",
-        "info":"Ingrese el código pin que su maestro/instructor le ha dado. Elige un nombre elegante."
-    },
-    "UsernameTextField":{
-        "label":"Ingrese un nombre de usuario"
-    },
-    "PinTextField":{
-        "label":"Ingrese el código pin"
-    },
-    "ButtonGuest":{
-        "label":"Unirse"
-    },
-    "Information":{
-        "label": "¡Nadie más que tú puede saberlo!",
-        "wait": "Espere hasta el siguiente paso..."
-    },
-    "TextFieldID":{
-        "label":"ID Privado"
-    },
-    "UserNameID":{
-        "label":"Este es tu identificador privado"
-    },
-    "Step_1":{
-        "step":"Paso 1",
-        "label": "Conoce tu identificador privado"
-    },
-    "Step_2":{
-        "step":"Step 2",
-        "label": "Hashing?",
-        "info_1": "Es simplemente aplicar una fórmula..",
-        "info_2":"¿Qué fórmula? ¡Lo que quiera la cadena de bloques!",
-        "title":"Por ejemplo:",
-        "example":"Grade 1 + Grade 2 + Grade 3 = Total",
-        "numeric":"80+65+70=215"
+  "StartGuest": {
+    "info": "Entrar a un juego actual"
+  },
+  "StartHost": {
+    "info": "Crear un juego",
+    "confirmation": "Confirmación",
+    "question": "Seguro que desea continuar?",
+    "cancel": "Cancelar",
+    "continue": "Continuar"
+  },
+  "StartDescription": {
+    "title": "¡Bienvenido a The Blockchain game!",
+    "info": "Basado en el juego diseñado por J Scott Christianson. En esta aplicación digital, aprenderás los fundamentos de Blockchain de una forma divertida e interactiva",
+    "quote": "“La cadena de bloques es el reto financiero de nuestro tiempo. Va a cambiar el funcionamiento de nuestro mundo financiero” - Blythe Masters."
+  },
+  "GamePin": { "label": "PIN:" },
 
-    }
-    
+  "GuestWelcome": {
+    "title": "¡Ya casi lo logras!",
+    "info": "Ingrese el PIN que su maestro/instructor le ha dado. Elija un nombre de usuario."
+  },
+  "UsernameTextField": {
+    "label": "Ingrese un nombre de usuario"
+  },
+  "PinTextField": {
+    "label": "Ingrese el código pin"
+  },
+  "ButtonGuest": {
+    "label": "Unirse"
+  },
+  "Information": {
+    "label": "¡Nadie más que tú puede saberlo!",
+    "wait": "Espere hasta el siguiente paso..."
+  },
+  "TextFieldID": {
+    "label": "ID Privado"
+  },
+  "UserNameID": {
+    "label": "Este es tu identificador privado"
+  },
+  "Step_1": {
+    "step": "Paso 1",
+    "label": "Conoce tu identificador privado"
+  },
+  "Step_2": {
+    "step": "Step 2",
+    "label": "Hashing?",
+    "info_1": "Es simplemente aplicar una fórmula..",
+    "info_2": "¿Qué fórmula? ¡Lo que quiera la cadena de bloques!",
+    "title": "Por ejemplo:",
+    "example": "Grade 1 + Grade 2 + Grade 3 = Total",
+    "numeric": "80+65+70=215"
+  },
+  "GuestLogin": {
+    "error": "Error de conexión, por favor verifique el PIN e intente nuevamente."
+  }
 }

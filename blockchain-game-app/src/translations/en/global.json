@@ -1,52 +1,58 @@
 {
-    "StartGuest":{
-        "info":"Enter to a current game"
-    },
-    "StartHost":{
-        "info":"Host a new game"
-    },
-    "StartDescription":{
-        "title":"Welcome to The blockchain game!",
-        "info":"Based on the game designed by J Scott Christianson. In this digital implementation, you will learn the basics of Blockchain in a fun and interactive way.",
-        "quote":"“The blockchain is the financial challenge of our time. It is going to change the way that our financial world operates” - Blythe Masters"
-    },
-    
-    "GuestWelcome":{
-        "title":"You are almost there!",
-        "info":"Please enter the pin code that your teacher/instructor has given you. Choose a fancy name."
-    },
-    "UsernameTextField":{
-        "label":"Enter a username"
-    },
-    "PinTextField":{
-        "label":"Enter the pin code"
-    },
-    "ButtonGuest":{
-        "label":"Le's do it!"
-    },
-    "Information":{
-        "label": "No one besides you can know it!",
-        "wait": "Please wait until the next step..."
-    },
-    "TextFieldID":{
-        "label":"Private ID"
-    },
-    "UserNameID":{
-        "label":"This is your private ID"
-    },
-    "Step_1":{
-        "step":"Step 1",
-        "label": "Know your private ID"
-    },
-    "Step_2":{
-        "step":"Step 2",
-        "label": "Hashing?",
-        "info_1": "It is just applying a formula.",
-        "info_2":"What formula? Whatever the blockchain wants!",
-        "title":"For example:",
-        "example":"Grade 1 + Grade 2 + Grade 3 = Total",
-        "numeric":"80+65+70=215"
+  "StartGuest": {
+    "info": "Enter to a current game"
+  },
+  "StartHost": {
+    "info": "Host a new game",
+    "confirmation": "Confirmation",
+    "question": "Are you sure you want to continue?",
+    "cancel": "Cancel",
+    "continue": "Continue"
+  },
+  "StartDescription": {
+    "title": "Welcome to The blockchain game!",
+    "info": "Based on the game designed by J Scott Christianson. In this digital implementation, you will learn the basics of Blockchain in a fun and interactive way.",
+    "quote": "“The blockchain is the financial challenge of our time. It is going to change the way that our financial world operates” - Blythe Masters"
+  },
+  "GamePin": { "label": "PIN:" },
 
-    }
-    
+  "GuestWelcome": {
+    "title": "You are almost there!",
+    "info": "Please enter the pin code that your teacher/instructor has given you. Choose a fancy name."
+  },
+  "UsernameTextField": {
+    "label": "Enter a username"
+  },
+  "PinTextField": {
+    "label": "Enter the pin code"
+  },
+  "ButtonGuest": {
+    "label": "Let's do it!"
+  },
+  "Information": {
+    "label": "No one besides you can know it!",
+    "wait": "Please wait until the next step..."
+  },
+  "TextFieldID": {
+    "label": "Private ID"
+  },
+  "UserNameID": {
+    "label": "This is your private ID"
+  },
+  "Step_1": {
+    "step": "Step 1",
+    "label": "Know your private ID"
+  },
+  "Step_2": {
+    "step": "Step 2",
+    "label": "Hashing?",
+    "info_1": "It is just applying a formula.",
+    "info_2": "What formula? Whatever the blockchain wants!",
+    "title": "For example:",
+    "example": "Grade 1 + Grade 2 + Grade 3 = Total",
+    "numeric": "80+65+70=215"
+  },
+  "GuestLogin": {
+    "error": "Connection error, please verify the PIN and try again."
+  }
 }
