@@ -44,9 +44,25 @@
         "info_1": "It is just applying a formula.",
         "info_2":"What formula? Whatever the blockchain wants!",
         "title":"For example:",
-        "example":"Grade 1 + Grade 2 + Grade 3 = Total",
+        "example":"a + b + c = Total",
         "numeric":"80+65+70=215"
 
+    },
+    "Block_1":{
+        "title": "Block 1",
+        "item_1": "Course:",
+        "value_1": "Parks 320",
+        "item_2": "Student Public Key:",
+        "value_2": "ad59da",
+        "item_3": "Grade:",
+        "value_3": "F",
+        "item_4": "a = ",
+        "value_4": "Value of the first letter of the course. (P=80)",
+        "item_5": "b = ",
+        "value_5": "Value of the second letter of the course. (A=65)",
+        "item_6": "c = ",
+        "value_6": "Value of the grade. (P=70)",
+        "item_7": "look up the table for the values"
     }
     
 }
