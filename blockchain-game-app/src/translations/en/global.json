@@ -1,6 +1,7 @@
 {
   "StartGuest": {
-    "info": "Enter to a current game"
+    "info": "Enter to a current game",
+    "waiting": "Please wait for the professor to continue with the activity."
   },
   "StartHost": {
     "info": "Host a new game",
