@@ -13,7 +13,6 @@ const ConnectionError = ({ open, handleClose }) => {
       anchorOrigin={{
         vertical: "bottom",
         horizontal: "center",
-        transform: `translate(-${10}rem, -${8}rem)`, // Use coordinates and rem units
       }}
     >
       <Alert severity="error" sx={{ width: "100%" }}>

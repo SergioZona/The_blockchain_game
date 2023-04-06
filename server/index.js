@@ -19,6 +19,18 @@ function generateRoom() {
   return uniqueRandomNumber;
 }
 
+// CSV
+function loadData() {
+  var csv_file = File("test.csv");
+  csv_file.open("r");
+  csv_file.encoding = "utf-8";
+  var data = csv_file.read().split("/\r\n|\n/"); // split by lines
+  csv_file.close();
+  for (var row in data) data[row].split(","); // split all lines by comas
+
+  alert(data); // here is your 2d array
+}
+
 // Initializations
 const app = express();
 const server = http.createServer(app);
@@ -54,10 +66,14 @@ io.on("connection", (socket) => {
     console.log(`User: ${data.username} is trying to connect to: ${data.room}`);
     if (usedNumbers.has(data.room)) {
       socket.join(data.room);
-      io.to(data.room).emit("user_joined", data.username);
+      data["socket"] = socket.id;
+      io.to(data.room).emit("user_joined", data);
+      io.to(socket.id).emit("successful_room_connection");
+      io.to(socket.id).emit("you_are_the_host");
       console.log(`User: ${data.username} joined to: ${data.room}`);
     } else {
       io.to(socket.id).emit("failed_room_connection");
+      console.log(`User: ${data.username} could not join to: ${data.room}`);
     }
   });
 

@@ -1,6 +1,7 @@
 {
   "StartGuest": {
-    "info": "Entrar a un juego actual"
+    "info": "Entrar a un juego actual",
+    "waiting": "Por favor espere a que el/la profesorx continue con la actividad."
   },
   "StartHost": {
     "info": "Crear un juego",
