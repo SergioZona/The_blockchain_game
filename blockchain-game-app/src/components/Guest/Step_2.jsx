@@ -4,7 +4,7 @@ import { ReactComponent as Logo } from '../../assets/Status_2.svg'
 
 import Information from './Step_2/Information';
 import { useTranslation } from "react-i18next";
-import FullBorderedGrid from "./Step_2/FullBorderedGrid";
+import Table from "./Step_2/Table";
 
 const Step_2 = ({ socket }) => {
     const [t, i18n] = useTranslation("global");
@@ -19,7 +19,7 @@ const Step_2 = ({ socket }) => {
         <Container sx={{ textAlign: "center",  marginTop: "-16rem" }}>
             <Logo  viewBox="0 -14 700 180"/>
         </Container>
-        <FullBorderedGrid></FullBorderedGrid>
+        <Table></Table>
         <Information></Information>
         </Container>
     );

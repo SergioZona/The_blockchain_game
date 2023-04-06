@@ -53,6 +53,10 @@
     "numeric":"80+65+70=215"
 
 },
+"Step_3":{
+  "step":"Paso 3",
+  "label": "Nonce?"
+},
   "GuestLogin": {
     "error": "Error de conexión, por favor verifique el PIN e intente nuevamente."
   },

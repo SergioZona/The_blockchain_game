@@ -10,6 +10,7 @@ const WaitingRoom = ({ socket, username, room }) => {
   const [namesList, setNamesList] = useState([]);
   const [numUsers, setNumUsers] = useState(0);
   const [pin, setPin] = useState("");
+  const [host, setHost] = useState("");
 
   useEffect(() => {
     // Emit "start_game" event to ask for the pin.
@@ -18,6 +19,8 @@ const WaitingRoom = ({ socket, username, room }) => {
     // Listen for "game_started" event to retrieve the pin.
     socket.on("game_started", (data) => {
       setPin(data);
+      setHost(true);    
+
     });
 
     // Update the name list.

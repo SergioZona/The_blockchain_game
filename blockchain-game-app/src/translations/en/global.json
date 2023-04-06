@@ -51,7 +51,11 @@
     "title":"For example:",
     "example":"a + b + c = Total",
     "numeric":"80+65+70=215"
-},
+  },
+  "Step_3":{
+    "step":"Step 3",
+    "label": "Nonce?"
+  },
   "GuestLogin": {
     "error": "Connection error, please verify the PIN and try again."
   },

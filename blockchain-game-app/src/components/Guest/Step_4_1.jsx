@@ -1,11 +1,11 @@
 import { Typography, Container } from "@mui/material";
 import Username from './Step_2/Username';
 import { ReactComponent as Logo } from '../../assets/Status_3.svg'
-import Table from './Step_3/Table';
+import Table from './Step_4_1/Table';
 import { useTranslation } from "react-i18next";
 import '../../css/components/Steps.css';
 
-const Step_22 = ({ socket }) => {
+const Step_41 = ({ socket }) => {
     const [t, i18n] = useTranslation("global");
     return (
         <Container sx={{lexDirection: 'column', alignItems: 'center' }}>
@@ -35,4 +35,4 @@ const Step_22 = ({ socket }) => {
     );
 };
 
-export default Step_22;
+export default Step_41;
