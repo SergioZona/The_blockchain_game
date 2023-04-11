@@ -15,7 +15,6 @@ const usedNumbers = new Set();
 function generateRoom() {
   const uniqueRandomNumber = generateUniqueRandomNumber(usedNumbers);
   usedNumbers.add(uniqueRandomNumber);
-  console.log(uniqueRandomNumber);
   return uniqueRandomNumber;
 }
 
@@ -69,12 +68,21 @@ io.on("connection", (socket) => {
       data["socket"] = socket.id;
       io.to(data.room).emit("user_joined", data);
       io.to(socket.id).emit("successful_room_connection");
-      io.to(socket.id).emit("you_are_the_host");
       console.log(`User: ${data.username} joined to: ${data.room}`);
     } else {
       io.to(socket.id).emit("failed_room_connection");
       console.log(`User: ${data.username} could not join to: ${data.room}`);
     }
+  });
+
+  // User join to a room - If there is not room, the connection fails.
+  socket.on("change_path", (usersInfo, path, room) => {
+    console.log(`Redirecting users in ${room} to path: ${path}`);
+    io.to(room).emit("change_path", {
+      usersInfo: usersInfo,
+      path: path,
+      room: room,
+    });
   });
 
   // When the user leaves the server.

@@ -18,16 +18,17 @@ import {
 const GuestLogin = ({ socket }) => {
   const [username, setUsername] = useState("");
   const [pin, setPin] = useState("");
+  const [navigation, setNavigation] = useState("");
   const [error, setError] = useState(false);
   const [joined, setJoined] = useState(false);
   const navigate = useNavigate();
 
-  const buttonClick = () => {
+  const buttonClick = async () => {
     let data = {};
     data["username"] = username;
     data["room"] = parseInt(pin);
 
-    socket.emit("join_user", data);
+    await socket.emit("join_user", data);
   };
 
   const handleClose = () => {
@@ -45,9 +46,15 @@ const GuestLogin = ({ socket }) => {
       setJoined(true);
     });
 
-    //
-    socket.on("continue_step_1", () => {
-      navigate("/sample");
+    // Join the user to the next step
+    socket.on("change_path", (data) => {
+      navigate("/" + data.path, {
+        state: {
+          data: data.data,
+          path: data.path,
+          room: data.room,
+        },
+      });
     });
   }, [socket]);
 
@@ -55,7 +62,10 @@ const GuestLogin = ({ socket }) => {
     <>
       {/* Use the LoadingButton if the user has joined */}
       {joined ? (
-        <LoadingSpinner />
+        <>
+          <LoadingSpinner />
+          <Typography>{navigation}</Typography>
+        </>
       ) : (
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
@@ -90,7 +100,6 @@ const GuestLogin = ({ socket }) => {
             </Grid>
           </Grid>
           <ConnectionError open={error} handleClose={handleClose} />
-
           <Outlet />
         </Box>
       )}

@@ -8,8 +8,6 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
-import { useEffect, useState } from "react";
-
 import GuestLogin from "./components/Guest/GuestLogin";
 import Step_1 from "./components/Guest/Step_1";
 import Step_2 from "./components/Guest/Step_2";
@@ -18,12 +16,8 @@ import Step_3 from "./components/Guest/Step_3";
 import Step_4 from "./components/Guest/Step_4";
 import Step_4_1 from "./components/Guest/Step_4_1";
 import WaitingRoom from "./components/Host/WaitingRoom";
-import DropdownMenu from "./components/Block_1/DropdownMenu";
-import Block_1 from "./components/Block_1/Block_1";
 import Root from "./components/Root";
 import NavBar from "./components/root/NavBar";
-
-import { Container } from "@mui/material";
 
 function App() {
   const socket = io.connect(SERVER_URL);
