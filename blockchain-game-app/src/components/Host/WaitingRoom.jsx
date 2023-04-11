@@ -1,34 +1,30 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { Container, Box, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import NavigationArrows from "../root/NavigationArrows";
 import GamePin from "./WaitingRoom/GamePin";
 import NumPlayers from "./WaitingRoom/NumPlayers";
-import NavigationArrows from "../root/NavigationArrows";
 
 const WaitingRoom = ({ socket }) => {
   const [t, i18n] = useTranslation("global");
   const [namesList, setNamesList] = useState([]);
-  const [dataList, setDataList] = useState([]);
+  const [usersInfo, setUsersInfo] = useState([]);
   const [numUsers, setNumUsers] = useState(0);
   const [pin, setPin] = useState("");
-  const [host, setHost] = useState("");
 
   useEffect(() => {
-    // Emit "start_game" event to ask for the pin.
     socket.emit("start_game");
+  }, []);
 
-    // Listen for "game_started" event to retrieve the pin.
+  useEffect(() => {
     socket.on("game_started", (data) => {
       setPin(data);
-      setHost(true);    
-
     });
-
     // Update the name list.
     socket.on("user_joined", (data) => {
       setNamesList((namesList) => [...namesList, data.username]);
-      setDataList((dataList) => [...dataList, data]);
+      setUsersInfo((usersInfo) => [...usersInfo, data]);
       setNumUsers((numUsers) => numUsers + 1);
     });
   }, [socket]);
@@ -63,7 +59,14 @@ const WaitingRoom = ({ socket }) => {
           </Box>
         </Container>
       </Container>
-      <NavigationArrows usersData={dataList} />
+      {namesList.length > 0 && (
+        <NavigationArrows
+          socket={socket}
+          host={true}
+          usersInfo={usersInfo}
+          room={pin}
+        ></NavigationArrows>
+      )}
     </>
   );
 };
