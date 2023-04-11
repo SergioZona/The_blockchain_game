@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
-import { Container, Box, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import NavigationArrows from "../root/NavigationArrows";
 import GamePin from "./WaitingRoom/GamePin";
 import NumPlayers from "./WaitingRoom/NumPlayers";
-import NavigationArrows from "../root/NavigationArrows";
 
 const WaitingRoom = ({ socket }) => {
   const [t, i18n] = useTranslation("global");

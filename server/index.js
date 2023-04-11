@@ -8,6 +8,8 @@ import { fileURLToPath } from "url";
 import { PORT } from "./config.js";
 import { generateUniqueRandomNumber } from "./roomGenerator.js";
 import cors from "cors";
+import fs from "fs";
+import Papa from "papaparse";
 
 // Room
 const usedNumbers = new Set();
@@ -18,17 +20,32 @@ function generateRoom() {
   return uniqueRandomNumber;
 }
 
-// CSV
-function loadData() {
-  var csv_file = File("test.csv");
-  csv_file.open("r");
-  csv_file.encoding = "utf-8";
-  var data = csv_file.read().split("/\r\n|\n/"); // split by lines
-  csv_file.close();
-  for (var row in data) data[row].split(","); // split all lines by comas
-
-  alert(data); // here is your 2d array
+// Load game data
+function groupBy(array, key) {
+  return array.reduce((result, item) => {
+    const group = item[key];
+    if (!result[group]) {
+      result[group] = {};
+    }
+    for (const k in item) {
+      if (k !== key) {
+        result[group][k] = item[k];
+      }
+    }
+    return result;
+  }, {});
 }
+
+function loadCSV(filename) {
+  const csvData = fs.readFileSync(filename, "utf8");
+  const parsedData = Papa.parse(csvData, { header: true });
+  const result = groupBy(parsedData.data, "student");
+  return result;
+}
+
+const gameData = loadCSV("data/data.csv");
+const roomUserCounts = {};
+const roomtUserSockets = {};
 
 // Initializations
 const app = express();
@@ -65,7 +82,21 @@ io.on("connection", (socket) => {
     console.log(`User: ${data.username} is trying to connect to: ${data.room}`);
     if (usedNumbers.has(data.room)) {
       socket.join(data.room);
+
       data["socket"] = socket.id;
+      const socketDict = {};
+
+      // Save the information for each socket in each room.
+      if (roomUserCounts.hasOwnProperty(data.room)) {
+        roomUserCounts[data.room] += 1;
+        socketDict[socket.id] = gameData[roomUserCounts[data.room]];
+        roomtUserSockets[data.room].push(socketDict);
+      } else {
+        roomUserCounts[data.room] = 0;
+        socketDict[socket.id] = gameData[roomUserCounts[data.room]];
+        roomtUserSockets[data.room] = [socketDict];
+      }
+
       io.to(data.room).emit("user_joined", data);
       io.to(socket.id).emit("successful_room_connection");
       console.log(`User: ${data.username} joined to: ${data.room}`);
@@ -83,6 +114,14 @@ io.on("connection", (socket) => {
       path: path,
       room: room,
     });
+
+    const roomSockets = roomtUserSockets[room];
+    for (var i = 0; i < roomSockets.length; i++) {
+      const socket = roomSockets[i];
+      const socketId = Object.keys(socket);
+      const socketData = socket[socketId];
+      io.to(socketId).emit("socket_data", socketData);
+    }
   });
 
   // When the user leaves the server.

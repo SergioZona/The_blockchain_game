@@ -1,5 +1,5 @@
 import { Container, Typography } from "@mui/material";
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/Status_3.svg";
@@ -10,6 +10,9 @@ import Table from "./Step_3/Table";
 
 const Step_22 = ({ socket }) => {
   const location = useLocation();
+  const [publicKey, setPublicKey] = useState("Public key");
+  const [privateKey, setPrivateKey] = useState("123456789");
+
   const {
     host = false,
     usersInfo = [],
@@ -18,23 +21,17 @@ const Step_22 = ({ socket }) => {
   } = location.state || {};
 
   useEffect(() => {
-    // Join the user to the next step
-    socket.on("change_path", (data) => {
-      navigate("/" + path, {
-        state: {
-          host: host,
-          data: data.usersInfo,
-          path: data.path,
-          room: data.room,
-        },
-      });
+    // Get socket data
+    socket.on("socket_data", (data) => {
+      setPublicKey(data.public_key);
+      setPrivateKey(data.private_key);
     });
   }, [socket]);
 
   const [t, i18n] = useTranslation("global");
   return (
     <Container sx={{ lexDirection: "column", alignItems: "center" }}>
-      <Username />
+      <Username publicKey={publicKey} privateKey={privateKey} />
       <Container sx={{ textAlign: "center", py: 29, marginLeft: "0rem" }}>
         <Typography variant="h6" sx={{ color: "#000000", mb: 4 }}>
           <strong>{t("Step_3.step")}:</strong> {t("Step_3.label")}

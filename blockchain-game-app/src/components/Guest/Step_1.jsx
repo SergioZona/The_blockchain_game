@@ -1,5 +1,5 @@
 import { Container, Typography } from "@mui/material";
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/Status_1.svg";
@@ -10,6 +10,9 @@ import UsernameId from "./Step_1/UsernameId";
 
 const Step_1 = ({ socket }) => {
   const location = useLocation();
+  const [publicKey, setPublicKey] = useState("Public key");
+  const [privateKey, setPrivateKey] = useState("123456789");
+
   const {
     host = false,
     usersInfo = [],
@@ -18,16 +21,10 @@ const Step_1 = ({ socket }) => {
   } = location.state || {};
 
   useEffect(() => {
-    // Join the user to the next step
-    socket.on("change_path", (data) => {
-      navigate("/" + path, {
-        state: {
-          host: host,
-          data: data.usersInfo,
-          path: data.path,
-          room: data.room,
-        },
-      });
+    // Get socket data
+    socket.on("socket_data", (data) => {
+      setPublicKey(data.public_key);
+      setPrivateKey(data.private_key);
     });
   }, [socket]);
 
@@ -36,7 +33,7 @@ const Step_1 = ({ socket }) => {
     <Container
       sx={{ maxWidth: "800px", lexDirection: "column", alignItems: "center" }}
     >
-      <Username />
+      <Username publicKey={publicKey} />
       <Container
         sx={{
           textAlign: "center",
@@ -53,7 +50,7 @@ const Step_1 = ({ socket }) => {
       <Container sx={{ textAlign: "center", marginTop: "-14rem" }}>
         <Logo viewBox="0 -14 700 180" />
       </Container>
-      <UsernameId></UsernameId>
+      <UsernameId privateKey={privateKey}></UsernameId>
       <Information></Information>
       <NavigationArrows
         socket={socket}

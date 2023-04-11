@@ -1,5 +1,5 @@
 import { Container, Typography } from "@mui/material";
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import DropdownMenu from "../Block_1/DropdownMenu";
@@ -8,6 +8,9 @@ import Username from "./Step_2/Username";
 
 const Step_4 = ({ socket }) => {
   const location = useLocation();
+  const [publicKey, setPublicKey] = useState("Public key");
+  const [privateKey, setPrivateKey] = useState("123456789");
+
   const {
     host = false,
     usersInfo = [],
@@ -16,16 +19,10 @@ const Step_4 = ({ socket }) => {
   } = location.state || {};
 
   useEffect(() => {
-    // Join the user to the next step
-    socket.on("change_path", (data) => {
-      navigate("/" + path, {
-        state: {
-          host: host,
-          data: data.usersInfo,
-          path: data.path,
-          room: data.room,
-        },
-      });
+    // Get socket data
+    socket.on("socket_data", (data) => {
+      setPublicKey(data.public_key);
+      setPrivateKey(data.private_key);
     });
   }, [socket]);
 
@@ -34,7 +31,8 @@ const Step_4 = ({ socket }) => {
     <Container
       sx={{ maxWidth: "800px", lexDirection: "column", alignItems: "center" }}
     >
-      <Username />
+      <Username publicKey={publicKey} privateKey={privateKey} />
+
       <DropdownMenu />
       <Container
         sx={{

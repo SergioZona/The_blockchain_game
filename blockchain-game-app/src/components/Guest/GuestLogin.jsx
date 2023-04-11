@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Grid, Box, Container, Typography } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import GuestWelcome from "./Login/GuestWelcome";
-import UsernameTextField from "./Login/UsernameTextField";
-import PinTextField from "./Login/PinTextField";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import ButtonGuest from "./Login/ButtonGuest";
 import ConnectionError from "./Login/ConnectionError";
+import GuestWelcome from "./Login/GuestWelcome";
 import LoadingSpinner from "./Login/LoadingSpinner";
+import PinTextField from "./Login/PinTextField";
+import UsernameTextField from "./Login/UsernameTextField";
 
-import {
-  useNavigate,
-  Outlet, // Default route in case it doesn't match.
-  Link,
-} from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 const GuestLogin = ({ socket }) => {
   const [username, setUsername] = useState("");

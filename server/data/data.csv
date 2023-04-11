@@ -1,4 +1,4 @@
-student,code,private_id,math,language,economy,chemistry,physics,biology,programming
+student,public_key,private_key,math,language,economy,chemistry,physics,biology,programming
 0,XZG72D,I6A1B9,D,A,C,C,D,C,F
 1,UW6WRN,KC64K5,F,A,A,B,A,B,B
 2,HFYD2R,PL21J0,A,D,B,A,B,D,D
