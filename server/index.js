@@ -85,6 +85,14 @@ io.on("connection", (socket) => {
     });
   });
 
+  // Update the table rows for the users in the room.
+  socket.on("update_table", (rows, room) => {
+    console.log(`Updating table for users in ${room} to rows: ${rows} `);
+    console.log(rows);
+    io.to(room).emit("table_updated", {
+      rows:rows,
+    });
+  });
   // When the user leaves the server.
   socket.on("disconnect", () => {
     console.log("User Disconnected", socket.id);
