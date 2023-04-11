@@ -3,16 +3,27 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 
 const MyTable = () => {
   const [lastValue, setLastValue] = useState("");
-  const [values, setValues] = useState([1, 80, 65, 70, 12, 204]); 
+  const [values, setValues] = useState(["?", "?", "?", 2, 4, 4]); 
   const titles = ['Nonce (1-3)', 'a', 'b', 'c', 'Value of the last 2 digits of the previous hash', 'Hash!'];
   const [pin, setPin] = useState("");
-
-  const setValue = (value) => {
+  const firstRow = [1, 80, 65, 70, 12, 204];
+  const setValue = (values) => {
     // Cambiar los valores cada 10 segundos
-    setValues([1, 80, 65, 70, 12, value]);
+    setValues(...values);
 ;
   }; 
 
+  const handleValuesChange = (event, index) => {
+    const value = event.target.value;
+    const newValues = [...values];
+    if (index < 3) {
+      newValues[index] = value;
+    } else if (index === 5) {
+      newValues[index - 1] = value;
+    }
+    setValues(newValues);
+  };
+  
 
   const setValidValue = (value) => {
     if (value >= 1 && value <= 3) {
@@ -25,25 +36,11 @@ const MyTable = () => {
         return newValues;
       });
     }
-  };
 
-  const validValue = (value) => {
-    const intValue = parseInt(value);
-  
   return Number.isInteger(intValue) && intValue >= 1 && intValue <= 3;
   }
 
-  const handleLastValueChange = (event) => {
-    setLastValue(event.target.value);
-    const value = parseInt(event.target.value);
-    if (value >= 1 && value <= 3) {
-      setValidValue(value);
-      setPin(value);
-      setValue(value+values[1]+values[2]+values[3]-values[4]);
-      setValidValue(null);
-    }
-    setLastValue(event.target.value);
-  }
+
 
   return (
     <TableContainer component={Paper} style={{ backgroundColor: '#e0ecfc' }}>
@@ -59,8 +56,35 @@ const MyTable = () => {
         </TableHead>
         <TableBody>
         <TableRow>
-            {values.map(value => (
+            {firstRow.map(value => (
               <TableCell key={value} align="center" style={{ border: '1px solid #000' }}>{value}</TableCell>
+            ))}
+          </TableRow>
+        <TableRow>
+        {values.map((value, index) => (
+              <TableCell
+              key={index}
+              align="center"
+              style={{ border: '1px solid #000',  maxWidth: '30px'}}
+            >
+              {index < 4 || index === 5 ? (
+                <TextField 
+              
+                inputProps={{ min: 1, max: 3 }}
+                  sx = {{ 
+                    width: "100px",
+                    marginLeft: "0px",
+                    marginRight: "0px",
+                  
+                  }}
+                  value={lastValue} 
+                  onChange={(event) => handleValuesChange(event, index)} 
+                  type="number"
+                />
+              ) : (
+                value
+              )} 
+              </TableCell>
             ))}
           </TableRow>
         </TableBody>
