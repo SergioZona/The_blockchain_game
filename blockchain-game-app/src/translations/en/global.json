@@ -114,6 +114,9 @@
     "block_subject": "Subject: ",
     "block_grade": "Grade: ",
     "wait": "Please wait for further information...",
-    "waiting_votes": "Please wait for the voting..."
+    "waiting_votes": "Please wait for the voting...",
+    "miner_found": "A miner found that the hash of the block is ",
+    "validation": "Is that correct?"
+
   }
 }

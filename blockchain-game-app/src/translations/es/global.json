@@ -130,6 +130,8 @@
     "block_subject": "Materia: ",
     "block_grade": "Nota: ",
     "wait": "Por favor espere a recibir más información...",
-    "waiting_votes": "Por favor espere la votación..."
+    "waiting_votes": "Por favor espere la votación...",
+    "miner_found": "Un minero encontró que el hash del bloque es ",
+    "validation": "¿Esto es correcto?"
   }
 }

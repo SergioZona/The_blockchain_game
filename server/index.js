@@ -47,6 +47,8 @@ const gameData = loadCSV("data/data.csv");
 const roomUserCounts = {};
 const roomtUserSockets = {};
 const roomBlocks = {};
+const roomVotes = {};
+const roomBlockVoting = {};
 
 // Initializations
 const app = express();
@@ -155,9 +157,25 @@ io.on("connection", (socket) => {
   // Start the votation
   socket.on("start_voting", (room, block) => {
     console.log(block);
+    roomBlockVoting[room] = block;
     console.log(`Start votation in room ${room} for hash ${block.hash}`);
-
+    roomVotes[room] = {'yes': 1, 'no': 0};
     io.to(room).emit("voting_started", block);
+  });
+
+  // Receive the vote from users
+  socket.on("receive_votes", (room, vote) => {
+    console.log(`Received vote ${vote} in room ${room}`);
+    roomVotes[room][vote] += 1;
+    const numUsers = roomtUserSockets[room].length;
+    console.log(numUsers/2);
+    if (roomVotes[room]['yes'] > numUsers/2) {
+      
+      io.to(room).emit("block_accepted", roomBlockVoting[room]);
+    }else if (roomVotes[room]['no'] > numUsers/2) {
+      io.to(room).emit("block_rejected");
+    }
+    io.to(room).emit("vote_received", roomVotes[room]);
   });
 
   // When the user leaves the server.

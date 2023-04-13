@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Typography, Button, Grid, Container } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-const BlockGenerator = ({ socket, room, host, giveInfo }) => {
+const BlockGenerator = ({ socket, room, host, setBlocks, setAllowModification }) => {
   const [t, i18n] = useTranslation("global");
   const [block, setBlock] = useState(t("BlockGenerator.label"));
   const [blockData, setBlockData] = useState();
 
   const generateBlock = async (room) => {
+
     await socket.emit("generate_block", room);
   };
 
@@ -16,7 +17,7 @@ const BlockGenerator = ({ socket, room, host, giveInfo }) => {
     socket.on("block_information_generated", (data) => {
       data.subject =
         data.subject.charAt(0).toUpperCase() + data.subject.slice(1);
-
+      //setAllowModification(true);
       setBlock(data.public_key + " - " + data.subject + " - " + data.grade);
       setBlockData(data);
 
@@ -29,7 +30,7 @@ const BlockGenerator = ({ socket, room, host, giveInfo }) => {
         hash: "",
       };
 
-      giveInfo((blocks) => [...blocks, emptyBlock]);
+      setBlocks((blocks) => [...blocks, emptyBlock]);
     });
   }, [socket]);
 
