@@ -58,7 +58,10 @@ const app = express();
 const server = http.createServer(app);
 const io = new SocketServer(server, {
   cors: {
-    origin: ["https://blockchain-game-server.onrender.com"], //"*", //"http://localhost:3000",
+    origin: [
+      "https://blockchain-game-server.onrender.com",
+      "http://localhost:5173",
+    ], //"*"
   },
   upgrade: false,
 });
