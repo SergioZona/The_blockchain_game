@@ -61,6 +61,7 @@ const io = new SocketServer(server, {
     origin: [
       "https://blockchain-game-server.onrender.com",
       "http://localhost:5173",
+      "https://the-blockchain-game-app.onrender.com",
     ], //"*"
   },
   upgrade: false,
