@@ -96,7 +96,8 @@
     "item_7": "look up the table for the values"
   },
   "Table": {
-    "last_digits": "Value of the last two digits of the previous hash"
+    "last_digits": "Value of the last two digits of the previous hash",
+    "block": "Bloque"
   },
   "BlockGenerator": {
     "generate": "Generate information",
@@ -108,6 +109,11 @@
     "add_row": "Add row",
     "delete_row": "Delete row",
     "update_table": "Update blockchain",
-    "vote": "Vote"
+    "vote": "Vote",
+    "block_public_key": "ID: ",
+    "block_subject": "Subject: ",
+    "block_grade": "Grade: ",
+    "wait": "Please wait for further information...",
+    "waiting_votes": "Please wait for the voting..."
   }
 }

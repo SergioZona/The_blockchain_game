@@ -59,7 +59,7 @@ const DropdownMnu = () => {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        sx={{ maxHeight: "500px" }}
+        sx={{ maxHeight: "32.5rem" }}
       >
         <MenuItem>
           <TableContainer component={Paper}>

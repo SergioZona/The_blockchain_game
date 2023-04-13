@@ -14,63 +14,89 @@ import {
 } from "@mui/material";
 import BlockGenerator from "./BlockGenerator";
 import { useTranslation } from "react-i18next";
-
+import InitialHash from "./InitialHash";
+import WaitingVotes from "./WaitingVotes";
 const BlockchainTable = ({ socket, host, room }) => {
   const [t, i18n] = useTranslation("global");
 
-  const titles = ["Nonce (1-3)", "a", "b", "c", t("Table.last_digits"), "Hash"];
-  const [rows, setRows] = useState([]);
-  const [newRows, setNewRows] = useState([]);
+  const titles = [
+    t("Table.block"),
+    "Nonce (1-3)",
+    "a",
+    "b",
+    "c",
+    t("Table.last_digits"),
+    "Hash",
+  ];
+  const [blocks, setBlocks] = useState([]);
+  const [voting, setVoting] = useState(false);
+  const [hash, setHash] = useState("");
+
+  const [newBlocks, setNewBlocks] = useState([]);
+  const [newEmptyBlocks, setNewEmptyBlocks] = useState([]);
   const [rowCount, setRowCount] = useState(1);
 
   useEffect(() => {
     // Join the user to the next step
     socket.on("table_updated", (data) => {
-      setNewRows(data.rows);
+      setNewBlocks(data.blocks);
     });
-  }, [socket]);
 
-  const handleClick = async (rows) => {
-    for (let i = 0; i < rows.length; i++) {
-      delete rows[i]["id"];
+    // Voting
+    socket.on("voting_started", (block) => {
+      setVoting(true);
+      setHash(block.hash);
+    });
+  }, [socket]); // TODO
+
+  const handleGetBlock = async (blocks) => {
+    for (let i = 0; i < blocks.length; i++) {
+      delete blocks[i]["id"];
     }
-    await socket.emit("update_table", rows, room);
+    await socket.emit("update_table", blocks, room);
   };
 
-  const handleGetBlock = async (rows) => {
-    for (let i = 0; i < rows.length; i++) {
-      delete rows[i]["id"];
-    }
-    await socket.emit("update_table", rows, room);
+  const hashValidation = async (room, block) => {
+    await socket.emit("start_voting", room, block);
   };
 
   const handleAddRow = () => {
-    const newRow = { id: rowCount + 1 };
-    setRows([...rows, newRow]);
+    const newRow = {
+      nonce: "",
+      a: "",
+      b: "",
+      c: "",
+      last_digits: "",
+      hash: "",
+    };
+
+    setBlocks([...blocks, newRow]);
     setRowCount(rowCount + 1);
   };
 
   const handleRemoveRow = () => {
-    const newRows = [...rows];
-    newRows.pop();
-    setRows(newRows);
+    const newBlocks = [...blocks];
+    newBlocks.pop();
+    setBlocks(newBlocks);
     setRowCount(rowCount - 1);
   };
 
   const handleInputChange = (event, field, row) => {
-    const newRows = [...rows];
-    const rowIndex = newRows.findIndex((r) => r.id === row.id);
-    newRows[rowIndex][field] = event.target.value;
-    setRows(newRows);
+    const newBlocks = [...blocks];
+    const rowIndex = newBlocks.findIndex((r) => r.id === row.id);
+    newBlocks[rowIndex][field] = event.target.value;
+    setBlocks(newBlocks);
   };
 
   return (
     <Container>
-      {host && (
-        <>
-          <BlockGenerator socket={socket} room={room}></BlockGenerator>
-        </>
-      )}
+      <BlockGenerator
+        socket={socket}
+        room={room}
+        host={host}
+        giveInfo={setBlocks}
+      ></BlockGenerator>
+
       <TableContainer component={Paper} style={{ backgroundColor: "#e0ecfc" }}>
         <Table>
           <TableHead>
@@ -82,7 +108,7 @@ const BlockchainTable = ({ socket, host, room }) => {
                   style={{
                     fontWeight: "bold",
                     border: "1px solid #000",
-                    maxWidth: "30px",
+                    minWidth: "60px",
                   }}
                 >
                   {title}
@@ -92,96 +118,84 @@ const BlockchainTable = ({ socket, host, room }) => {
           </TableHead>
           {host && (
             <TableBody>
-              {rows.map((row) => (
+              <InitialHash />
+              {blocks.map((row, index) => (
                 <TableRow key={row.id}>
                   <TableCell
                     align="center"
                     style={{ border: "1px solid #000" }}
                   >
-                    <TextField
-                      value={row.nonce}
-                      onChange={(event) => {
-                        handleInputChange(event, "nonce", row);
-                      }}
-                    />
+                    {index + 1}
                   </TableCell>
-                  <TableCell
-                    align="center"
-                    style={{ border: "1px solid #000" }}
-                  >
-                    <TextField
-                      value={row.a}
-                      onChange={(event) => {
-                        handleInputChange(event, "a", row);
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    style={{ border: "1px solid #000" }}
-                  >
-                    <TextField
-                      value={row.b}
-                      onChange={(event) => {
-                        handleInputChange(event, "b", row);
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    style={{ border: "1px solid #000" }}
-                  >
-                    <TextField
-                      value={row.c}
-                      onChange={(event) => {
-                        handleInputChange(event, "c", row);
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    style={{ border: "1px solid #000" }}
-                  >
-                    <TextField
-                      value={row.lastDigits}
-                      onChange={(event) => {
-                        handleInputChange(
-                          event,
-                          "Value of the last 2 digits of the previous hash",
-                          row
-                        );
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    style={{ border: "1px solid #000" }}
-                  >
-                    <TextField
-                      value={row.hash}
-                      onChange={(event) => {
-                        handleInputChange(event, "hash", row);
-                      }}
-                    />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          )}
-          {!host && (
-            <TableBody>
-              {newRows.map((row, index) => (
-                <TableRow key={index}>
                   {Object.keys(row).map((key) => (
                     <TableCell
                       key={key}
                       align="center"
                       style={{ border: "1px solid #000" }}
                     >
-                      {row[key]}
+                      <TextField
+                        onChange={(event) => {
+                          handleInputChange(event, key, row);
+                        }}
+                      />
                     </TableCell>
                   ))}
                 </TableRow>
+              ))}
+            </TableBody>
+          )}
+          {!host && (
+            <TableBody>
+              <InitialHash />
+
+              {blocks.map((row, index) => (
+                <>
+                  {blocks.length - 1 == index ? (
+                    <>
+                      <TableRow key={row.id}>
+                        <TableCell
+                          align="center"
+                          style={{ border: "1px solid #000" }}
+                        >
+                          {index + 1}
+                        </TableCell>
+                        {Object.keys(row).map((key) => (
+                          <TableCell
+                            key={key}
+                            align="center"
+                            style={{ border: "1px solid #000" }}
+                          >
+                            <TextField
+                              onChange={(event) => {
+                                handleInputChange(event, key, row);
+                              }}
+                            />
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </>
+                  ) : (
+                    <>
+                      <TableRow key={row.id}>
+                        <TableCell
+                          align="center"
+                          style={{ border: "1px solid #000" }}
+                        >
+                          {index + 1}
+                        </TableCell>
+                        {Object.keys(row).map((key) => (
+                          <TableCell
+                            key={key}
+                            align="center"
+                            style={{ border: "1px solid #000" }}
+                          >
+                            {row[key]}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </>
+                  )}
+                </>
               ))}
             </TableBody>
           )}
@@ -192,7 +206,7 @@ const BlockchainTable = ({ socket, host, room }) => {
           <Grid item xs={12}>
             <Button
               variant="contained"
-              onClick={() => handleClick(rows)}
+              onClick={() => handleGetBlock(blocks)}
               sx={{ marginTop: 2, width: 250, height: 35 }}
             >
               {t("BlockchainTable.update_table")}
@@ -227,12 +241,19 @@ const BlockchainTable = ({ socket, host, room }) => {
       {!host && (
         <Grid container spacing={1} sx={{ justifyContent: "center" }}>
           <Grid item xs={12}>
-            <Button
-              variant="contained"
-              sx={{ marginTop: 2, width: 70, height: 35 }}
-            >
-              {t("BlockchainTable.vote")}
-            </Button>
+            {!voting ? (
+              <Button
+                variant="contained"
+                sx={{ marginTop: 2, width: 70, height: 35 }}
+                onClick={() => {
+                  hashValidation(room, blocks[blocks.length - 1]);
+                }}
+              >
+                {t("BlockchainTable.vote")}
+              </Button>
+            ) : (
+              <WaitingVotes />
+            )}
           </Grid>
         </Grid>
       )}

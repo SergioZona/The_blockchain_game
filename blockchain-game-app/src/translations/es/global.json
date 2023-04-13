@@ -112,7 +112,8 @@
     "item_7": "Busca en la tabla los valores"
   },
   "Table": {
-    "last_digits": "Valor de los dos últimos dígitos del hash previo"
+    "last_digits": "Valor de los dos últimos dígitos del hash previo",
+    "block": "Bloque"
   },
   "BlockGenerator": {
     "generate": "Generar información",
@@ -124,6 +125,11 @@
     "add_row": "Agregar fila",
     "delete_row": "Eliminar fila",
     "update_table": "Actualizar Blockchain",
-    "vote": "Votar"
+    "vote": "Votar",
+    "block_public_key": "ID: ",
+    "block_subject": "Materia: ",
+    "block_grade": "Nota: ",
+    "wait": "Por favor espere a recibir más información...",
+    "waiting_votes": "Por favor espere la votación..."
   }
 }

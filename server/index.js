@@ -152,6 +152,14 @@ io.on("connection", (socket) => {
     io.to(room).emit("block_information_generated", block);
   });
 
+  // Start the votation
+  socket.on("start_voting", (room, block) => {
+    console.log(block);
+    console.log(`Start votation in room ${room} for hash ${block.hash}`);
+
+    io.to(room).emit("voting_started", block);
+  });
+
   // When the user leaves the server.
   socket.on("disconnect", () => {
     console.log("User Disconnected", socket.id);
