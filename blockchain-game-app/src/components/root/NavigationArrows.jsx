@@ -4,7 +4,7 @@ import { Box, IconButton } from "@mui/material";
 import { React, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const NavigationArrows = ({ socket, host, usersInfo, room }) => {
+const NavigationArrows = ({ socket, host, room }) => {
   const location = useLocation();
   let navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const NavigationArrows = ({ socket, host, usersInfo, room }) => {
   const nextExists = next == null ? false : true;
 
   const handleClick = async (path) => {
-    await socket.emit("change_path", usersInfo, path, parseInt(room));
+    await socket.emit("change_path", path, parseInt(room));
   };
 
   useEffect(() => {
@@ -33,7 +33,6 @@ const NavigationArrows = ({ socket, host, usersInfo, room }) => {
       navigate("/" + data.path, {
         state: {
           host: host,
-          data: data.usersInfo,
           path: data.path,
           room: data.room,
         },

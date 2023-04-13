@@ -7,10 +7,8 @@ const Username = ({ publicKey, privateKey }) => {
     <Container>
       <Container
         sx={{
-          position: "absolute",
-          left: 7,
-          top: 10,
-          py: 8,
+          marginLeft: -1.5,
+          marginTop: 0,
           display: "flex",
           alignItems: "center",
         }}
@@ -36,17 +34,18 @@ const Username = ({ publicKey, privateKey }) => {
           {publicKey}
         </Typography>
       </Container>
-      <Container
-        sx={{
-          position: "absolute",
-          left: 7,
-          py: 20,
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <TextFieldId privateKey={privateKey} />
-      </Container>
+      {privateKey != "default" && (
+        <Container
+          sx={{
+            marginLeft: -1,
+            marginTop: 0,
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <TextFieldId privateKey={privateKey} />
+        </Container>
+      )}
     </Container>
   );
 };

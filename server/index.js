@@ -6,7 +6,7 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
 import { PORT } from "./config.js";
-import { generateUniqueRandomNumber } from "./roomGenerator.js";
+import { generateUniqueRandomNumber, generateBlock } from "./random.js";
 import cors from "cors";
 import fs from "fs";
 import Papa from "papaparse";
@@ -46,6 +46,7 @@ function loadCSV(filename) {
 const gameData = loadCSV("data/data.csv");
 const roomUserCounts = {};
 const roomtUserSockets = {};
+const roomBlocks = {};
 
 // Initializations
 const app = express();
@@ -107,16 +108,15 @@ io.on("connection", (socket) => {
   });
 
   // User join to a room - If there is not room, the connection fails.
-  socket.on("change_path", (usersInfo, path, room) => {
+  socket.on("change_path", (path, room) => {
     console.log(`Redirecting users in ${room} to path: ${path}`);
     io.to(room).emit("change_path", {
-      usersInfo: usersInfo,
       path: path,
       room: room,
     });
 
     const roomSockets = roomtUserSockets[room];
-    for (var i = 0; i < roomSockets.length; i++) {
+    for (let i = 0; i < roomSockets.length; i++) {
       const socket = roomSockets[i];
       const socketId = Object.keys(socket);
       const socketData = socket[socketId];
@@ -129,9 +129,29 @@ io.on("connection", (socket) => {
     console.log(`Updating table for users in ${room} to rows: ${rows} `);
     console.log(rows);
     io.to(room).emit("table_updated", {
-      rows:rows,
+      rows: rows,
     });
   });
+
+  // Update the table rows for the users in the room.
+  socket.on("generate_block", (room) => {
+    console.log(`Generating block for ${room}`);
+
+    const roomSockets = roomtUserSockets[room];
+    console.log(roomSockets);
+
+    const block = generateBlock(roomSockets, roomBlocks);
+
+    // Save the information for each socket in each room.
+    if (roomBlocks.hasOwnProperty(room)) {
+      roomBlocks[room].push(block);
+    } else {
+      roomBlocks[room] = [block];
+    }
+
+    io.to(room).emit("block_information_generated", block);
+  });
+
   // When the user leaves the server.
   socket.on("disconnect", () => {
     console.log("User Disconnected", socket.id);

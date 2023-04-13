@@ -34,12 +34,7 @@ function App() {
         <Route path="/Step_3" element={<Step_3 socket={socket} />} />
         <Route path="/Step_4" element={<Step_4 socket={socket} />} />
         <Route path="/Step_4_1" element={<Step_4_1 socket={socket} />} />
-        <Route
-          path="/WaitingRoom"
-          element={
-            <WaitingRoom socket={socket} room={"123"} username={"123"} />
-          }
-        />
+        <Route path="/WaitingRoom" element={<WaitingRoom socket={socket} />} />
         <Route path="/Confirmation" element={<WaitingRoom />} />
 
         {/* <Route path="*" element={return (<div>Esta ruta no existe<div/>)} /> */}

@@ -12,7 +12,7 @@
   },
   "StartDescription": {
     "title": "Welcome to The blockchain game!",
-    "info": "Based on the game designed by J Scott Christianson. In this digital implementation, you will learn the basics of Blockchain in a fun and interactive way.",
+    "info": "Based on the game designed by J Scott Christianson. In this digital application, you will learn the basics of Blockchain in a easy and interactive way.",
     "quote": "“The blockchain is the financial challenge of our time. It is going to change the way that our financial world operates” - Blythe Masters"
   },
   "GamePin": { "label": "PIN:" },
@@ -38,29 +38,48 @@
     "label": "Private ID"
   },
   "UserNameID": {
-    "label": "This is your private ID"
+    "label": "This is your private ID:"
+  },
+  "Grades": {
+    "title": "Performance",
+    "subject": "Subject",
+    "grade": "Grade",
+    "math": "Math",
+    "language": "Language",
+    "economy": "Economy",
+    "chemistry": "Chemistry",
+    "physics": "Physics",
+    "biology": "Biology",
+    "programming": "Programming"
   },
   "Step_1": {
     "step": "Step 1",
-    "label": "Know your private ID"
+    "label": "Know your private ID."
   },
-  "Step_2":{
-    "step":"Step 2",
-    "label": "Hashing?",
+  "Step_2": {
+    "step": "Step 2",
+    "label": "What is a hash?",
     "info_1": "It is just applying a formula.",
-    "info_2":"What formula? Whatever the blockchain wants!",
-    "title":"For example:",
-    "example":"a + b + c = Total",
-    "numeric":"80+65+70=215"
+    "info_2": "What formula? Whatever the blockchain wants!",
+    "title": "For example:",
+    "example": "a + b + c = Total",
+    "numeric": "80 + 65 + 70 = 215"
   },
-  "Step_3":{
-    "step":"Step 3",
+  "Step_21": {
+    "add_complexity": "Now, let's add a little complexity to our formula.",
+    "rule": "Let's subtract the last two digits of the previous hash.",
+    "example_title": "For example:",
+    "example": "a + b + c - Last two digits of the previous hash = Hash",
+    "numeric": "80 + 65 + 70 - 12 = 203"
+  },
+  "Step_3": {
+    "step": "Step 3",
     "label": "Nonce?"
   },
   "GuestLogin": {
     "error": "Connection error, please verify the PIN and try again."
   },
-"Block_1":{
+  "Block_1": {
     "title": "Block 1",
     "item_1": "Course:",
     "value_1": "Parks 320",
@@ -75,5 +94,20 @@
     "item_6": "c = ",
     "value_6": "Value of the grade. (P=70)",
     "item_7": "look up the table for the values"
+  },
+  "Table": {
+    "last_digits": "Value of the last two digits of the previous hash"
+  },
+  "BlockGenerator": {
+    "generate": "Generate information",
+    "send": "Send information",
+    "label": "Please generate the information of a block..."
+  },
+  "BlockchainTable": {
+    "practice": "¡Time to practice!",
+    "add_row": "Add row",
+    "delete_row": "Delete row",
+    "update_table": "Update blockchain",
+    "vote": "Vote"
   }
 }

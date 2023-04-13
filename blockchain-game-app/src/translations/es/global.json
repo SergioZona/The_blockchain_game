@@ -12,8 +12,8 @@
   },
   "StartDescription": {
     "title": "¡Bienvenido a The Blockchain game!",
-    "info": "Basado en el juego diseñado por J Scott Christianson. En esta aplicación digital, aprenderás los fundamentos de Blockchain de una forma divertida e interactiva",
-    "quote": "“La cadena de bloques es el reto financiero de nuestro tiempo. Va a cambiar el funcionamiento de nuestro mundo financiero” - Blythe Masters."
+    "info": "Basado en el juego diseñado por J. Scott Christianson. En esta aplicación, aprenderás los fundamentos de Blockchain de una manera fácil e interactiva",
+    "quote": "“La blockchain es el reto financiero de nuestro tiempo. Va a cambiar el funcionamiento de nuestro mundo financiero” - Blythe Masters."
   },
   "GamePin": { "label": "PIN:" },
 
@@ -31,51 +31,99 @@
     "label": "Unirse"
   },
   "Information": {
-    "label": "¡Nadie más que tú puede saberlo!",
-    "wait": "Espere hasta el siguiente paso..."
+    "label": "¡Solo tú puedes conocerlo!",
+    "wait": "Espera hasta el siguiente paso..."
   },
   "TextFieldID": {
     "label": "ID Privado"
   },
   "UserNameID": {
-    "label": "Este es tu identificador privado"
+    "label": "Este es tu ID privado:"
+  },
+  "Grades": {
+    "title": "Desempeño",
+    "subject": "Materia",
+    "grade": "Nota",
+    "math": "Matemáticas",
+    "language": "Lenguaje",
+    "economy": "Economía",
+    "chemistry": "Química",
+    "physics": "Física",
+    "biology": "Biología",
+    "programming": "Programación"
   },
   "Step_1": {
     "step": "Paso 1",
-    "label": "Conoce tu identificador privado"
+    "label": "Conoce tu ID privado."
   },
-  "Step_2":{
-    "step":"Step 2",
-    "label": "Hashing?",
-    "info_1": "Es simplemente aplicar una fórmula..",
-    "info_2":"¿Qué fórmula? ¡Lo que quiera la cadena de bloques!",
-    "title":"Por ejemplo:",
-    "example":"a + b + c = Total",
-    "numeric":"80+65+70=215"
+  "Step_2": {
+    "step": "Paso 2",
+    "label": "¿Qué es un hash?",
+    "info_1": "Es simplemente aplicar una fórmula.",
+    "info_2": "¿Qué fórmula? ¡La que requiera la blockchain!",
+    "title": "Por ejemplo:",
+    "example": "a + b + c = Hash",
+    "numeric": "80 + 65 + 70 = 215"
+  },
+  "Step_21": {
+    "add_complexity": "Ahora, agreguemos un poco de complejidad a nuestra fórmula.",
+    "rule": "Vamos a restar los dos últimos dígitos del hash previo.",
+    "example_title": "Por ejemplo:",
+    "example": "a + b + c - Dos últimos dígitos del hash previo = Hash",
+    "numeric": "80 + 65 + 70 - 12 = 203"
+  },
+  "Step_3": {
+    "step": "Paso 3",
+    "label": "Los mineros y el Nonce.",
+    "add_rule": "Agreguemos una última regla a nuestro juego: el hash debe ser múltiplo de 3.",
+    "nonce_part1": "Para ello, buscaremos un valor determinado que cumpla esta regla el ",
+    "nonce_part2": "Nonce ",
+    "nonce_part3": "(number only used once).",
+    "equation1": "Calculemos el valor actual de hash:",
+    "equation1_part1": "a + b + c - Dos últimos dígitos del hash previo = Hash",
+    "equation1_part2": "80 + 65 + 70 - 12 = 203 ",
+    "equation1_explanation": "Pero 203 no es múltiplo de 3",
+    "equation2": "Ajustemos nuestra fórmula:",
+    "equation2_part1": "a + b + c - Dos últimos dígitos del hash previo + ",
+    "equation2_part2": "Nonce ",
+    "equation2_part3": "= Hash",
+    "equation2_part4": "80 + 65 + 70 - 12 + ",
+    "equation2_part5": "= 203",
 
-},
-"Step_3":{
-  "step":"Paso 3",
-  "label": "Nonce?"
-},
+    "description": "Nonce is a number between 1 and 3 that you will adjust to calculate a hash that can be equally divisible by 3"
+  },
   "GuestLogin": {
     "error": "Error de conexión, por favor verifique el PIN e intente nuevamente."
   },
-  "Block_1":{
-      "title": "Bloque 1",
-      "item_1": "Curso:",
-      "value_1": "Parks 320",
-      "item_2": "Llave pública del estudiante:",
-      "value_2": "ad59da",
-      "item_3": "Nota:",
-      "value_3": "F",
-      "item_4": "a = ",
-      "value_4": "Valor de la primera letra del curso. (P=80)",
-      "item_5": "b = ",
-      "value_5": "Valor de la segunda letra del curso. (A=65)",
-      "item_6": "c = ",
-      "value_6": "Valor de la nota. (P=70)",
-      "item_7": "Busca en la tabla los valores"
+  "Block_1": {
+    "title": "Bloque 1",
+    "item_1": "Curso:",
+    "value_1": "Parks 320",
+    "item_2": "Llave pública del estudiante:",
+    "value_2": "ad59da",
+    "item_3": "Nota:",
+    "value_3": "F",
+    "item_4": "a = ",
+    "value_4": "Valor de la primera letra del curso. (P=80)",
+    "item_5": "b = ",
+    "value_5": "Valor de la segunda letra del curso. (A=65)",
+    "item_6": "c = ",
+    "value_6": "Valor de la nota. (P=70)",
+    "item_7": "Busca en la tabla los valores"
+  },
+  "Table": {
+    "last_digits": "Valor de los dos últimos dígitos del hash previo"
+  },
+  "BlockGenerator": {
+    "generate": "Generar información",
+    "send": "Enviar información",
+    "label": "Por favor genere la información de un bloque..."
+  },
+  "BlockchainTable": {
+    "practice": "¡Momento de practicar!",
+    "add_row": "Agregar fila",
+    "delete_row": "Eliminar fila",
+    "update_table": "Actualizar Blockchain",
+    "vote": "Votar"
   }
 }
-

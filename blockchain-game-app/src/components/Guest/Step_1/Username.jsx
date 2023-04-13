@@ -5,10 +5,8 @@ const Username = ({ publicKey }) => {
   return (
     <Container
       sx={{
-        position: "absolute",
-        left: 7,
-        top: 10,
-        py: 8,
+        marginLeft: -22,
+        marginTop: 10,
         display: "flex",
         alignItems: "center",
       }}
