@@ -81,19 +81,19 @@
   },
   "Block_1": {
     "title": "Block 1",
-    "item_1": "Course:",
-    "value_1": "Parks 320",
-    "item_2": "Student Public Key:",
-    "value_2": "ad59da",
+    "item_1": "Student Public ID:",
+    "value_1": "AD59DA",
+    "item_2": "Course:",
+    "value_2": "Parks 320",
     "item_3": "Grade:",
     "value_3": "F",
     "item_4": "a = ",
-    "value_4": "Value of the first letter of the course. (P=80)",
+    "value_4": "Value of the first letter of the public ID. (A=65)",
     "item_5": "b = ",
-    "value_5": "Value of the second letter of the course. (A=65)",
+    "value_5": "Value of the second letter of the course/subject. (A=65)",
     "item_6": "c = ",
-    "value_6": "Value of the grade. (P=70)",
-    "item_7": "look up the table for the values"
+    "value_6": "Value of the grade. (F=70)",
+    "item_7": "Look up the table for the values"
   },
   "Table": {
     "last_digits": "Value of the last two digits of the previous hash",
@@ -115,7 +115,7 @@
     "block_grade": "Grade: ",
     "wait": "Please wait for further information...",
     "waiting_votes": "Please wait for the voting...",
-    "miner_found": "A miner found that the hash of the block is ",
+    "miner_found": "A miner found that the hash of the block is: ",
     "validation": "Is that correct?",
     "validate_blockchain": "Validate Blockchain",
     "hash_empty": "Hash error, please enter a hash to request a votation."

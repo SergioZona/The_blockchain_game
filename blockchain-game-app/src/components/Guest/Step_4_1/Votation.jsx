@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Typography, Button, Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-const Votation = ({ socket, room, hasVoted, hash, setHasVoted }) => {
+const Votation = ({ socket, room, hasVoted, hash, setHasVoted, miner }) => {
   const [yesVotes, setYesVotes] = useState(0);
   const [noVotes, setNoVotes] = useState(0);
   const [totalVotes, setTotalVotes] = useState(0);
+
   const [t, i18n] = useTranslation("global");
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const Votation = ({ socket, room, hasVoted, hash, setHasVoted }) => {
         <>
           <Grid item xs={12}>
             <Typography variant="body1">
-              {t("BlockchainTable.miner_found") + hash}
+              {t("BlockchainTable.miner_found") + hash + " - " + miner}
             </Typography>
           </Grid>
           <Grid item xs={12}>

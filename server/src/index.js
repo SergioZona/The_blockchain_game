@@ -52,6 +52,7 @@ const roomBlocks = {};
 const roomVotes = {};
 const roomBlockVoting = {};
 const roomBlockchain = {};
+const roomMiner = {};
 
 // Initializations
 const app = express();
@@ -178,12 +179,15 @@ io.on("connection", (socket) => {
   });
 
   // Start the votation
-  socket.on("start_voting", (room, block) => {
-    console.log(block);
+  socket.on("start_voting", (room, block, miner) => {
     roomBlockVoting[room] = block;
+    roomMiner[room] = miner;
+
+    console.log(miner);
+
     console.log(`Start votation in room ${room} for hash ${block.hash}`);
     roomVotes[room] = { yes: 1, no: 0 };
-    io.to(room).emit("voting_started", block);
+    io.to(room).emit("voting_started", { block: block, miner: miner });
   });
 
   // Receive the vote from users

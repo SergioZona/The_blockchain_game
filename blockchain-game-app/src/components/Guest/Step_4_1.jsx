@@ -15,6 +15,7 @@ const Step_41 = ({ socket }) => {
   const [t, i18n] = useTranslation("global");
   const location = useLocation();
   const [hash, setHash] = useState("");
+  const [miner, setMiner] = useState("");
   const [publicKey, setPublicKey] = useState("Public key");
   const [privateKey, setPrivateKey] = useState("123456789");
   const [voting, setVoting] = useState(false);
@@ -41,12 +42,11 @@ const Step_41 = ({ socket }) => {
   };
 
   // Voting
-  socket.on("voting_started", (block) => {
+  socket.on("voting_started", (data) => {
     setVoting(true);
-    setHash(block.hash);
+    setHash(data.block.hash);
+    setMiner(data.miner);
   });
-
-  
 
   useEffect(() => {
     // Get socket data
@@ -71,12 +71,11 @@ const Step_41 = ({ socket }) => {
       setVoting(false);
     });
 
-      // Add new block to the blockchain
-      socket.on("block_accepted", () => {
-        setVoting(false);
-        setHasVoted(false);
-  
-      });
+    // Add new block to the blockchain
+    socket.on("block_accepted", () => {
+      setVoting(false);
+      setHasVoted(false);
+    });
   }, [socket]);
 
   return (
@@ -96,15 +95,28 @@ const Step_41 = ({ socket }) => {
         </Typography>
 
         <Container sx={{ mt: 4, mb: 4 }}>
-          <Table socket={socket} host={host} room={room} setHasVoted={setHasVoted} voting={voting} />
+          <Table
+            socket={socket}
+            host={host}
+            room={room}
+            setHasVoted={setHasVoted}
+            voting={voting}
+            publicKey={publicKey}
+          />
         </Container>
       </Grid>
       <Grid item xs={2}>
         <DropdownMenu />
         {voting && (
-          <Votation hasVoted={hasVoted}  setHasVoted={setHasVoted} socket={socket} hash={hash} room={room}></Votation>
+          <Votation
+            hasVoted={hasVoted}
+            setHasVoted={setHasVoted}
+            socket={socket}
+            hash={hash}
+            room={room}
+            miner={miner}
+          ></Votation>
         )}
-
       </Grid>
       <NavigationArrows
         socket={socket}

@@ -19,7 +19,14 @@ import WaitingVotes from "./WaitingVotes";
 import Votation from "./Votation";
 import HashError from "./HashError";
 
-const BlockchainTable = ({ socket, host, room, setHasVoted, voting }) => {
+const BlockchainTable = ({
+  socket,
+  host,
+  room,
+  setHasVoted,
+  voting,
+  publicKey,
+}) => {
   const [t, i18n] = useTranslation("global");
 
   const titles = [
@@ -68,10 +75,10 @@ const BlockchainTable = ({ socket, host, room, setHasVoted, voting }) => {
     await socket.emit("validate_blockchain", room);
   };
 
-  const hashValidation = async (room, block) => {
+  const hashValidation = async (room, block, publicKey) => {
     if (block.hash != "") {
       setHasVoted(true);
-      await socket.emit("start_voting", room, block);
+      await socket.emit("start_voting", room, block, publicKey);
     } else {
       setHashError(true);
     }
@@ -294,7 +301,11 @@ const BlockchainTable = ({ socket, host, room, setHasVoted, voting }) => {
                     variant="contained"
                     sx={{ marginTop: 2, width: 70, height: 35 }}
                     onClick={() => {
-                      hashValidation(room, blocks[blocks.length - 1]);
+                      hashValidation(
+                        room,
+                        blocks[blocks.length - 1],
+                        publicKey
+                      );
                     }}
                   >
                     {t("BlockchainTable.vote")}
