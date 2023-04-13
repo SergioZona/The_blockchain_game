@@ -60,9 +60,10 @@ const server = http.createServer(app);
 const io = new SocketServer(server, {
   cors: {
     origin: [
-      "https://blockchain-game-server.onrender.com",
-      "http://localhost:5173",
-      "https://the-blockchain-game-app.onrender.com",
+      "*",
+      // "https://blockchain-game-server.onrender.com",
+      // "http://localhost:5173",
+      // "https://the-blockchain-game-app.onrender.com",
     ], //"*"
   },
   upgrade: false,
