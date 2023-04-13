@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import InitialHash from "./InitialHash";
 import WaitingVotes from "./WaitingVotes";
 import Votation from "./Votation";
+import HashError from "./HashError";
 
 const BlockchainTable = ({ socket, host, room, setHasVoted, voting }) => {
   const [t, i18n] = useTranslation("global");
@@ -31,21 +32,20 @@ const BlockchainTable = ({ socket, host, room, setHasVoted, voting }) => {
     "Hash",
   ];
   const [blocks, setBlocks] = useState([]);
-  const [newBlocks, setNewBlocks] = useState([]);
-  const [newEmptyBlocks, setNewEmptyBlocks] = useState([]);
+  const [realBlockchain, setRealBlockchain] = useState([]);
   const [rowCount, setRowCount] = useState(1);
   const [allowModiffication, setAllowModiffication] = useState(true);
+  const [hashError, setHashError] = useState(false);
 
   useEffect(() => {
     // Join the user to the next step
     socket.on("table_updated", (data) => {
-      setNewBlocks(data.blocks);
+      setBlocks(data.blocks);
     });
-
 
     // Add new block to the blockchain
     socket.on("block_accepted", (block) => {
-      setBlocks(blockchain => {
+      setBlocks((blockchain) => {
         const lastIndex = blockchain.length - 1;
         const newBlocks = [...blockchain];
         newBlocks[lastIndex] = block;
@@ -53,19 +53,32 @@ const BlockchainTable = ({ socket, host, room, setHasVoted, voting }) => {
       });
       setAllowModiffication(false);
     });
-  }, [socket]); // TODO
 
-  const handleGetBlock = async (blocks) => {
-    for (let i = 0; i < blocks.length; i++) {
-      delete blocks[i]["id"];
-    }
-    setAllowModiffication(true);
+    // Add new block to the blockchain
+    socket.on("blockchain_validated", (realBlockchain) => {
+      setRealBlockchain(realBlockchain);
+    });
+  }, [socket]);
+
+  const updateTable = async (blocks) => {
     await socket.emit("update_table", blocks, room);
   };
 
+  const validateBlockchain = async () => {
+    await socket.emit("validate_blockchain", room);
+  };
+
   const hashValidation = async (room, block) => {
-    setHasVoted(true);
-    await socket.emit("start_voting", room, block);
+    if (block.hash != "") {
+      setHasVoted(true);
+      await socket.emit("start_voting", room, block);
+    } else {
+      setHashError(true);
+    }
+  };
+
+  const handleClose = () => {
+    setHashError(false);
   };
 
   const handleAddRow = () => {
@@ -90,10 +103,9 @@ const BlockchainTable = ({ socket, host, room, setHasVoted, voting }) => {
     setRowCount(rowCount - 1);
   };
 
-  const handleInputChange = (event, field, row) => {
+  const handleInputChange = (event, field, index) => {
     const newBlocks = [...blocks];
-    const rowIndex = newBlocks.findIndex((r) => r.id === row.id);
-    newBlocks[rowIndex][field] = event.target.value;
+    newBlocks[index][field] = event.target.value;
     setBlocks(newBlocks);
   };
 
@@ -130,7 +142,7 @@ const BlockchainTable = ({ socket, host, room, setHasVoted, voting }) => {
             <TableBody>
               <InitialHash />
               {blocks.map((row, index) => (
-                <TableRow  key={index}>
+                <TableRow key={index}>
                   <TableCell
                     align="center"
                     style={{ border: "1px solid #000" }}
@@ -141,12 +153,20 @@ const BlockchainTable = ({ socket, host, room, setHasVoted, voting }) => {
                     <TableCell
                       key={key}
                       align="center"
-                      style={{ border: "1px solid #000" }}
+                      style={{
+                        border: "1px solid #000",
+                        // backgroundColor:
+                        //   realBlockchain.length === 0
+                        //     ? "white"
+                        //     : row[key] !== realBlockchain[index][key]
+                        //     ? "red"
+                        //     : "white",
+                      }}
                     >
                       <TextField
-                      value={row[key]}
+                        value={row[key]}
                         onChange={(event) => {
-                          handleInputChange(event, key, row);
+                          handleInputChange(event, key, index);
                         }}
                       />
                     </TableCell>
@@ -179,13 +199,12 @@ const BlockchainTable = ({ socket, host, room, setHasVoted, voting }) => {
                             {allowModiffication ? (
                               <TextField
                                 onChange={(event) => {
-                                  handleInputChange(event, key, row);
+                                  handleInputChange(event, key, index);
                                 }}
                               />
                             ) : (
                               row[key]
                             )}
-
                           </TableCell>
                         ))}
                       </TableRow>
@@ -215,25 +234,25 @@ const BlockchainTable = ({ socket, host, room, setHasVoted, voting }) => {
               ))}
             </TableBody>
           )}
-
         </Table>
       </TableContainer>
       {host && (
         <Grid container spacing={1} sx={{ justifyContent: "center" }}>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <Button
               variant="contained"
-              onClick={() => handleGetBlock(blocks)}
+              onClick={() => updateTable(blocks)}
               sx={{ marginTop: 2, width: 250, height: 35 }}
             >
               {t("BlockchainTable.update_table")}
             </Button>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <Button
               variant="contained"
               onClick={handleAddRow}
               sx={{
+                marginTop: 2,
                 width: 150,
                 height: 35,
               }}
@@ -241,11 +260,21 @@ const BlockchainTable = ({ socket, host, room, setHasVoted, voting }) => {
               {t("BlockchainTable.add_row")}
             </Button>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <Button
               variant="contained"
-              onClick={handleRemoveRow}
+              onClick={() => updateTable()}
+              sx={{ marginTop: 0, width: 250, height: 35 }}
+            >
+              {t("BlockchainTable.validate_blockchain")}
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              variant="contained"
+              onClick={() => validateBlockchain(blocks)}
               sx={{
+                marginTop: 0,
                 width: 150,
                 height: 35,
               }}
@@ -260,17 +289,17 @@ const BlockchainTable = ({ socket, host, room, setHasVoted, voting }) => {
           <Grid item xs={12}>
             {!voting ? (
               <>
-              {allowModiffication && (
-              <Button
-                variant="contained"
-                sx={{ marginTop: 2, width: 70, height: 35 }}
-                onClick={() => {
-                  hashValidation(room, blocks[blocks.length - 1]);
-                }}
-              >
-                {t("BlockchainTable.vote")}
-              </Button>
-              )}
+                {allowModiffication && (
+                  <Button
+                    variant="contained"
+                    sx={{ marginTop: 2, width: 70, height: 35 }}
+                    onClick={() => {
+                      hashValidation(room, blocks[blocks.length - 1]);
+                    }}
+                  >
+                    {t("BlockchainTable.vote")}
+                  </Button>
+                )}
               </>
             ) : (
               <WaitingVotes />
@@ -278,6 +307,7 @@ const BlockchainTable = ({ socket, host, room, setHasVoted, voting }) => {
           </Grid>
         </Grid>
       )}
+      <HashError open={hashError} handleClose={handleClose} />
     </Container>
   );
 };

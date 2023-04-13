@@ -7,6 +7,8 @@ import { fileURLToPath } from "url";
 
 import { PORT } from "./config.js";
 import { generateUniqueRandomNumber, generateBlock } from "./random.js";
+import { calculateHash } from "./blockchain.js";
+
 import cors from "cors";
 import fs from "fs";
 import Papa from "papaparse";
@@ -49,13 +51,14 @@ const roomtUserSockets = {};
 const roomBlocks = {};
 const roomVotes = {};
 const roomBlockVoting = {};
+const roomBlockchain = {};
 
 // Initializations
 const app = express();
 const server = http.createServer(app);
 const io = new SocketServer(server, {
   cors: {
-    origin: "*", //"http://localhost:3000",
+    origin: ["https://blockchain-game-server.onrender.com"], //"*", //"http://localhost:3000",
   },
   upgrade: false,
 });
@@ -127,11 +130,11 @@ io.on("connection", (socket) => {
   });
 
   // Update the table rows for the users in the room.
-  socket.on("update_table", (rows, room) => {
-    console.log(`Updating table for users in ${room} to rows: ${rows} `);
-    console.log(rows);
+  socket.on("update_table", (blocks, room) => {
+    console.log(`Updating table for users in ${room} to rows: ${blocks} `);
+    console.log(blocks);
     io.to(room).emit("table_updated", {
-      rows: rows,
+      blocks: blocks,
     });
   });
 
@@ -147,9 +150,25 @@ io.on("connection", (socket) => {
     // Save the information for each socket in each room.
     if (roomBlocks.hasOwnProperty(room)) {
       roomBlocks[room].push(block);
+      const previousBlockIndex = roomBlocks[room].length - 2;
+      const previousBlock = roomBlockchain[room][previousBlockIndex];
+      const previousHash = parseInt(previousBlock.hash.toString().slice(-2)); // Obtain the last two digits of the previous hash
+
+      roomBlockchain[room].push(
+        calculateHash(
+          block.public_key,
+          block.subject,
+          block.grade,
+          previousHash
+        )
+      );
     } else {
       roomBlocks[room] = [block];
+      roomBlockchain[room] = [
+        calculateHash(block.public_key, block.subject, block.grade, 12),
+      ]; // Initial hash: 212
     }
+    console.log(roomBlockchain[room]);
 
     io.to(room).emit("block_information_generated", block);
   });
@@ -159,7 +178,7 @@ io.on("connection", (socket) => {
     console.log(block);
     roomBlockVoting[room] = block;
     console.log(`Start votation in room ${room} for hash ${block.hash}`);
-    roomVotes[room] = {'yes': 1, 'no': 0};
+    roomVotes[room] = { yes: 1, no: 0 };
     io.to(room).emit("voting_started", block);
   });
 
@@ -168,14 +187,24 @@ io.on("connection", (socket) => {
     console.log(`Received vote ${vote} in room ${room}`);
     roomVotes[room][vote] += 1;
     const numUsers = roomtUserSockets[room].length;
-    console.log(numUsers/2);
-    if (roomVotes[room]['yes'] > numUsers/2) {
-      
+    if (roomVotes[room]["yes"] > numUsers / 2) {
       io.to(room).emit("block_accepted", roomBlockVoting[room]);
-    }else if (roomVotes[room]['no'] > numUsers/2) {
+    } else if (roomVotes[room]["no"] >= numUsers / 2) {
       io.to(room).emit("block_rejected");
     }
     io.to(room).emit("vote_received", roomVotes[room]);
+  });
+
+  // Solve the blockchain values
+  socket.on("solve_blockchain", (room) => {
+    console.log(`Solving the blockchain in room ${room}`);
+    io.to(room).emit("blockchain_solved", roomBlockchain[room]);
+  });
+
+  // Validate the blockchain current blockchain with the correct one.
+  socket.on("validate_blockchain", (room) => {
+    console.log(`Validating the blockchain in room ${room}`);
+    io.to(room).emit("blockchain_validated", roomBlockchain[room]);
   });
 
   // When the user leaves the server.

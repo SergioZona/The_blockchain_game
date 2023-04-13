@@ -2,22 +2,30 @@ import React, { useState, useEffect } from "react";
 import { Typography, Button, Grid, Container } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-const BlockGenerator = ({ socket, room, host, setBlocks, setAllowModification }) => {
+const BlockGenerator = ({
+  socket,
+  room,
+  host,
+  setBlocks,
+  setAllowModification,
+}) => {
   const [t, i18n] = useTranslation("global");
   const [block, setBlock] = useState(t("BlockGenerator.label"));
   const [blockData, setBlockData] = useState();
 
   const generateBlock = async (room) => {
-
     await socket.emit("generate_block", room);
   };
 
   useEffect(() => {
+    setBlock(t("BlockGenerator.label"));
+
     //Get block data
     socket.on("block_information_generated", (data) => {
       data.subject =
         data.subject.charAt(0).toUpperCase() + data.subject.slice(1);
-      //setAllowModification(true);
+
+      setAllowModification(true);
       setBlock(data.public_key + " - " + data.subject + " - " + data.grade);
       setBlockData(data);
 
@@ -32,7 +40,7 @@ const BlockGenerator = ({ socket, room, host, setBlocks, setAllowModification })
 
       setBlocks((blocks) => [...blocks, emptyBlock]);
     });
-  }, [socket]);
+  }, [socket, t]);
 
   return (
     <>
@@ -55,7 +63,7 @@ const BlockGenerator = ({ socket, room, host, setBlocks, setAllowModification })
             <Grid item xs={6}>
               <Typography variant="h6">{block}</Typography>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6}>
               <Grid container justifyContent="center">
                 <Grid item>
                   <Button
@@ -66,15 +74,6 @@ const BlockGenerator = ({ socket, room, host, setBlocks, setAllowModification })
                     }}
                   >
                     {t("BlockGenerator.generate")}
-                  </Button>
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item xs={3}>
-              <Grid container justifyContent="center">
-                <Grid item>
-                  <Button variant="contained" sx={{ width: 175, height: 50 }}>
-                    {t("BlockGenerator.send")}
                   </Button>
                 </Grid>
               </Grid>

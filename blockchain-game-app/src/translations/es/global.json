@@ -132,6 +132,8 @@
     "wait": "Por favor espere a recibir más información...",
     "waiting_votes": "Por favor espere la votación...",
     "miner_found": "Un minero encontró que el hash del bloque es ",
-    "validation": "¿Esto es correcto?"
+    "validation": "¿Esto es correcto?",
+    "validate_blockchain": "Validar Blockchain",
+    "hash_empty": "Error en el hash, por favor ingrese un hash para solicitar una votación."
   }
 }
