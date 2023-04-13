@@ -3,10 +3,19 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 
 const MyTable = ({ socket, host, usersInfo, room, tableData, onTableDataChange}) => {
 
-  const titles = ['Nonce (1-3)', 'a', 'b', 'c', 'Value of the last 2 digits of the previous hash', 'Hash!'];
+  const titles = ['Bloque', 'Nonce (1-3)', 'a', 'b', 'c', 'Value of the last 2 digits of the previous hash', 'Hash!'];
   const [rows, setRows] = useState([]);
   const [newRows, setNewRows] = useState([]);
   const [rowCount, setRowCount] = useState(1);
+  const [votedRow, setVotedRow] = useState([]);
+  const emptyRow = {
+    'Nonce (1-3)': '',
+    'a': '',
+    'b': '',
+    'c': '',
+    'Value of the last 2 digits of the previous hash': '',
+    'Hash!': ''
+  } 
 
 
     useEffect(() => {
@@ -14,13 +23,19 @@ const MyTable = ({ socket, host, usersInfo, room, tableData, onTableDataChange})
       socket.on("table_updated", (data) => {
         setNewRows(data.rows);
       });
-    }, [socket]);
+    }, [socket, newRows]);
 
   const handleClick = async (rows) => {
     for (let i = 0; i < rows.length; i++) {
       delete rows[i]["id"];
   }
     await socket.emit("update_table", rows, room);
+  };
+
+  const buttonClick = async () => {
+    
+
+    await socket.emit("vote", row);
   };
   
   const handleAddRow = () => {
@@ -37,11 +52,12 @@ const MyTable = ({ socket, host, usersInfo, room, tableData, onTableDataChange})
   };
 
   const handleInputChange = (event, field, row) => {
-      const newRows = [...rows];
-      const rowIndex = newRows.findIndex(r => r.id === row.id);
-      newRows[rowIndex][field] = event.target.value;
-      setRows(newRows);
-  };
+    const newRows = [...rows];
+    const rowIndex = newRows.findIndex(r => r.id === row.id);
+    newRows[rowIndex][field] = event.target.value;
+    setRows(newRows);
+    
+};
 
 
   return (
@@ -51,7 +67,7 @@ const MyTable = ({ socket, host, usersInfo, room, tableData, onTableDataChange})
         <TableHead>
           <TableRow style={{ backgroundColor: '#e0ecfc' }}>
             {titles.map((title) => (
-              <TableCell key={title} align="center" style={{ fontWeight: 'bold', border: '1px solid #000', maxWidth: '30px' }}>
+              <TableCell key={title} align="center" style={{ fontWeight: 'bold', border: '1px solid #000', minWidth: '60px' }}>
                 {title}
               </TableCell>
             ))}
@@ -59,8 +75,23 @@ const MyTable = ({ socket, host, usersInfo, room, tableData, onTableDataChange})
         </TableHead>
         {host && (
           <TableBody>
-          {rows.map((row) => (
+             <TableRow style={{ backgroundColor: '#FFFFFF' , maxWidth: '30px'}} >
+             <TableCell align="center" style={{ borderLeft: '1px solid #000', borderBottom: '1px solid #000' }}></TableCell>
+             <TableCell align="center" style={{ borderBottom: '1px solid #000' }}></TableCell>
+             <TableCell align="center" style={{ borderBottom: '1px solid #000' }}></TableCell>
+             <TableCell align="center" style={{ borderBottom: '1px solid #000' }}></TableCell>
+             <TableCell align="center" style={{ borderBottom: '1px solid #000' }}></TableCell>
+             <TableCell align="center" style={{ borderBottom: '1px solid #000' }}></TableCell>
+             <TableCell align="center" style={{ border: '1px solid #000', backgroundColor: '#FFC300' }}>
+               <strong>212</strong>
+             </TableCell>
+           </TableRow>
+          {rows.map((row, index) => (
             <TableRow key={row.id}>
+              <TableCell align="center" style={{ border: '1px solid #000' }}>
+                {index + 1}
+                
+              </TableCell>
               <TableCell align="center" style={{ border: '1px solid #000' }}>
                 <TextField value={row.nonce} onChange={(event) => {
                   handleInputChange(event, 'nonce', row)
@@ -85,7 +116,7 @@ const MyTable = ({ socket, host, usersInfo, room, tableData, onTableDataChange})
                 }} />
               </TableCell>
               <TableCell align="center" style={{ border: '1px solid #000' }}>
-                <TextField value={row.lastDigits} onChange={(event) => {
+                <TextField value={row['Value of the last 2 digits of the previous hash']} onChange={(event) => {
                   handleInputChange(event, 'Value of the last 2 digits of the previous hash', row)
                   
                 }} />
@@ -103,13 +134,35 @@ const MyTable = ({ socket, host, usersInfo, room, tableData, onTableDataChange})
         )}
         {!host &&  (
           <TableBody>
+            <TableRow style={{ backgroundColor: '#FFFFFF' , maxWidth: '30px'}} >
+             <TableCell align="center" style={{ borderLeft: '1px solid #000', borderBottom: '1px solid #000' }}></TableCell>
+             <TableCell align="center" style={{ borderBottom: '1px solid #000' }}></TableCell>
+             <TableCell align="center" style={{ borderBottom: '1px solid #000' }}></TableCell>
+             <TableCell align="center" style={{ borderBottom: '1px solid #000' }}></TableCell>
+             <TableCell align="center" style={{ borderBottom: '1px solid #000' }}></TableCell>
+             <TableCell align="center" style={{ borderBottom: '1px solid #000' }}></TableCell>
+             <TableCell align="center" style={{ border: '1px solid #000', backgroundColor: '#FFC300' }}>
+               <strong>212</strong>
+             </TableCell>
+           </TableRow>
           {newRows.map((row, index) => (
             <TableRow key={index}>
+              <TableCell align="center" style={{ border: '1px solid #000' }}>{index + 1}</TableCell>
               {Object.keys(row).map((key) => (
                 <TableCell key={key} align="center" style={{ border: '1px solid #000' }}>{row[key]}</TableCell>
              ))}
+              
             </TableRow>
+            
           ))}
+          <TableRow key={-1}>
+            <TableCell align="center" style={{ border: '1px solid #000' }}>{newRows.length + 1}</TableCell>
+            {Object.keys(emptyRow).map((key) => (
+              <TableCell key={key} align="center" style={{ border: '1px solid #000' }}>
+                <TextField onChange={(event) => handleInputChange(event, key, emptyRow)} />
+              </TableCell>
+            ))}
+          </TableRow>
         </TableBody>
         )}  
       </Table>
@@ -127,7 +180,7 @@ const MyTable = ({ socket, host, usersInfo, room, tableData, onTableDataChange})
     )}
     {!host && (
       <Container style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>
-        <Button variant="contained"  sx={{   marginTop: '20px' }}>Votar</Button>
+        <Button variant="contained" onClick={buttonClick(votedRow)} sx={{   marginTop: '20px' }}>Votar</Button>
       </Container>
     )}
     </Container>
